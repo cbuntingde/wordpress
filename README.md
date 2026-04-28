@@ -137,6 +137,20 @@ the permission slip.
 7. Check the audit log at wp-content/axiom/audit-*.log if anything breaks
 ```
 
+## Admin Dashboard
+
+Axiom includes a full admin dashboard under **Axiom Security** in your WordPress
+admin menu. It has four sections:
+
+| Page | What You Can Do |
+|---|---|
+| **Dashboard** | See your security mode at a glance, active plugin counts, manifest coverage, audit events, and blocked actions |
+| **Settings** | Switch modes (learning/audit/enforce/disabled), adjust CPU and memory limits, configure logging |
+| **Plugins** | See which plugins have manifests, view their isolation mode, and generate new manifests from observed behavior |
+| **Audit Log** | Browse, filter, and search security events; clear the log |
+
+The dashboard is available to administrators with the `manage_options` capability.
+
 ## What's Different From Regular WordPress
 
 Axiom is still WordPress. All your themes, plugins, and content work the
@@ -163,6 +177,10 @@ wp-content/axiom/                  ← The security system
   Bridge/                          ← The connection layer that watches plugins
   Security/                        ← The permission checker  
   Profiler/                        ← The learning mode and logging system
+  Admin/                           ← WordPress admin dashboard
+    css/admin.css                  ←   Dashboard styles
+    js/admin.js                    ←   Dashboard interactions
+    views/                         ←   Page templates (Dashboard, Settings, Plugins, Audit Log)
   manifests/                       ← Your plugin permission slips go here
 SECURITY.md                        ← Detailed security documentation (technical)
 ```

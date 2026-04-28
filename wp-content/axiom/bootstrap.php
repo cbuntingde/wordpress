@@ -36,4 +36,11 @@ if ( ! defined( 'AXIOM_LOADED' ) ) {
     define( 'AXIOM_LOADED', true );
 
     Kernel::get_instance()->init();
+
+    // Lazy-load admin dashboard when in wp-admin.
+    if ( is_admin() ) {
+        add_action( 'admin_init', static function (): void {
+            \Axiom\Admin\Admin::get_instance()->init();
+        }, 0 );
+    }
 }
