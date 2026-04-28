@@ -1,0 +1,32 @@
+# WordPress
+wp-config.php
+sitemap.xml
+sitemap.xml.gz
+
+# Uploads
+wp-content/uploads/*
+!wp-content/uploads/.gitkeep
+
+# Cache
+wp-content/cache/
+wp-content/advanced-cache.php
+
+# Environment
+.env
+.env.local
+
+# OS
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# Logs
+wp-content/axiom/audit-*.log
+
+# IDE
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace

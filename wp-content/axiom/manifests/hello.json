@@ -1,0 +1,42 @@
+{
+    "id": "hello",
+    "name": "Hello Dolly",
+    "manifest_version": "1.0",
+    "isolation": "namespace",
+    "permissions": {
+        "db": {
+            "read": [],
+            "write": [],
+            "delete": [],
+            "alter": []
+        },
+        "filesystem": [
+            "read:wp-content/plugins/hello.php"
+        ],
+        "network": {
+            "outbound": []
+        },
+        "wp": {
+            "hooks": {
+                "read_only": [
+                    "admin_head"
+                ],
+                "write": [
+                    "admin_head"
+                ]
+            },
+            "options": {
+                "read": [],
+                "write": []
+            },
+            "users": {
+                "read": []
+            }
+        },
+        "system": []
+    },
+    "resource_limits": {
+        "cpu_ms": 50,
+        "memory_mb": 8
+    }
+}

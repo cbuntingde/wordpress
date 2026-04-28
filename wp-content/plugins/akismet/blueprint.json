@@ -1,0 +1,106 @@
+{
+    "id": "akismet",
+    "name": "Akismet Anti-spam: Spam Protection",
+    "manifest_version": "1.0",
+    "isolation": "namespace",
+    "permissions": {
+        "db": {
+            "read": [
+                "wp_commentmeta",
+                "wp_comments",
+                "wp_options",
+                "wp_postmeta",
+                "wp_posts",
+                "wp_users"
+            ],
+            "write": [
+                "wp_commentmeta",
+                "wp_comments",
+                "wp_options"
+            ],
+            "delete": [
+                "wp_commentmeta",
+                "wp_comments"
+            ],
+            "alter": []
+        },
+        "filesystem": [
+            "read:wp-content/plugins/akismet/*",
+            "write:wp-content/plugins/akismet/*"
+        ],
+        "network": {
+            "outbound": [
+                "rest.akismet.com",
+                "*.akismet.com"
+            ]
+        },
+        "wp": {
+            "hooks": {
+                "read_only": [
+                    "init",
+                    "admin_init",
+                    "wp_loaded",
+                    "comment_*",
+                    "wp_comment_*",
+                    "akismet_*",
+                    "plugins_loaded",
+                    "admin_menu",
+                    "admin_enqueue_scripts",
+                    "wp_enqueue_scripts",
+                    "transition_comment_status",
+                    "comment_post",
+                    "wp_set_comment_status",
+                    "edit_comment",
+                    "delete_comment",
+                    "preprocess_comment",
+                    "comment_form_*",
+                    "rest_api_init",
+                    "wp_ajax_*",
+                    "xmlrpc_call",
+                    "comment_row_actions",
+                    "manage_comments_*",
+                    "load-*",
+                    "admin_notices",
+                    "network_admin_notices"
+                ],
+                "write": [
+                    "init",
+                    "admin_init",
+                    "plugins_loaded",
+                    "rest_api_init",
+                    "comment_*",
+                    "akismet_*"
+                ]
+            },
+            "options": {
+                "read": [
+                    "wordpress_api_key",
+                    "akismet_*",
+                    "siteurl",
+                    "home",
+                    "blogname",
+                    "admin_email",
+                    "comment_*",
+                    "moderation_*",
+                    "jetpack_*"
+                ],
+                "write": [
+                    "wordpress_api_key",
+                    "akismet_*"
+                ]
+            },
+            "users": {
+                "read": [
+                    "read",
+                    "edit_posts",
+                    "moderate_comments"
+                ]
+            }
+        },
+        "system": []
+    },
+    "resource_limits": {
+        "cpu_ms": 200,
+        "memory_mb": 32
+    }
+}
