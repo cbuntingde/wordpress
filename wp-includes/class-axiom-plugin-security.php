@@ -308,187 +308,30 @@ final class Axiom_Plugin_Security {
 
 		$css = "
 <style>
-/* ── Design Tokens ──────────────────────────────── */
-.ax-wrap {
-    --mp-primary:       #2271b1;
-    --mp-primary-hover: #135e96;
-    --mp-primary-focus: #72aee6;
-    --mp-success:       #00a32a;
-    --mp-warning:       #dba617;
-    --mp-error:         #d63638;
-    --mp-surface:       #ffffff;
-    --mp-surface-alt:   #f6f7f7;
-    --mp-border:        #dcdcde;
-    --mp-text:          #1d2327;
-    --mp-text-muted:    #646970;
-    --mp-text-inverse:  #ffffff;
-    --mp-radius-sm:     4px;
-    --mp-radius-md:     6px;
-    --mp-radius-lg:     8px;
-    --mp-space-xs:  4px; --mp-space-sm:  8px;
-    --mp-space-md:  16px; --mp-space-lg:  24px;
-    --mp-space-xl:  32px; --mp-space-2xl: 48px;
-    --mp-font-sm:   13px; --mp-font-base: 14px;
-    --mp-font-md:   15px; --mp-font-lg:  18px;
-    --mp-font-xl:   22px;
-    --mp-shadow: 0 1px 3px rgba(0,0,0,.08), 0 1px 2px rgba(0,0,0,.06);
-    --mp-transition: 150ms ease;
-}
+/* Minimal custom styles for patterns WP admin has no native class for */
 
-/* ── Tab Navigation ────────────────────────────── */
-.ax-tabs {
-    display: flex;
-    gap: 2px;
-    border-bottom: 2px solid var(--mp-border);
-    margin-bottom: var(--mp-space-lg);
-}
-.ax-tab {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--mp-space-xs);
-    padding: var(--mp-space-sm) var(--mp-space-md);
-    font-size: var(--mp-font-base);
-    font-weight: 500;
-    color: var(--mp-text-muted);
-    text-decoration: none;
-    border-bottom: 2px solid transparent;
-    margin-bottom: -2px;
-    transition: all var(--mp-transition);
-}
-.ax-tab:hover {
-    color: var(--mp-text);
-    border-bottom-color: var(--mp-primary-focus);
-}
-.ax-tab.is-active {
-    color: var(--mp-primary);
-    border-bottom-color: var(--mp-primary);
-    font-weight: 600;
-}
-
-/* ── Card ──────────────────────────────────────── */
-.ax-card {
-    background: var(--mp-surface);
-    border: 1px solid var(--mp-border);
-    border-radius: var(--mp-radius-lg);
-    box-shadow: var(--mp-shadow);
-    overflow: hidden;
-}
-.ax-card-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: var(--mp-space-md) var(--mp-space-lg);
-    border-bottom: 1px solid var(--mp-border);
-    background: var(--mp-surface-alt);
-}
-.ax-card-title {
-    font-size: var(--mp-font-md);
-    font-weight: 600;
-    margin: 0;
-}
-.ax-card-body {
-    padding: var(--mp-space-lg);
-}
-.ax-card-footer {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    gap: var(--mp-space-sm);
-    padding: var(--mp-space-md) var(--mp-space-lg);
-    border-top: 1px solid var(--mp-border);
-    background: var(--mp-surface-alt);
-}
-
-/* ── Stat Cards ────────────────────────────────── */
 .ax-stat-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: var(--mp-space-md);
-    margin-bottom: var(--mp-space-lg);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 20px;
 }
-.ax-stat-card {
-    background: var(--mp-surface);
-    border: 1px solid var(--mp-border);
-    border-radius: var(--mp-radius-lg);
-    padding: var(--mp-space-lg);
-    box-shadow: var(--mp-shadow);
-}
-.ax-stat-label {
-    font-size: var(--mp-font-sm);
-    font-weight: 500;
-    color: var(--mp-text-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.03em;
-    margin-bottom: var(--mp-space-xs);
+.ax-stat-grid .card {
+    max-width: none;
+    flex: 1;
+    min-width: 180px;
 }
 .ax-stat-value {
-    font-size: 28px;
+    font-size: 26px;
     font-weight: 700;
-    color: var(--mp-text);
+    color: #1d2327;
     line-height: 1.2;
 }
-.ax-stat-desc {
-    font-size: var(--mp-font-sm);
-    color: var(--mp-text-muted);
-    margin-top: var(--mp-space-xs);
-}
 
-/* ── Buttons ───────────────────────────────────── */
-.ax-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--mp-space-xs);
-    padding: 6px 14px;
-    font-size: var(--mp-font-base);
-    font-family: inherit;
-    font-weight: 500;
-    line-height: 1.4;
-    border-radius: var(--mp-radius-md);
-    border: 1px solid var(--mp-border);
-    background: var(--mp-surface);
-    color: var(--mp-text);
-    cursor: pointer;
-    text-decoration: none;
-    transition: all var(--mp-transition);
-    white-space: nowrap;
-}
-.ax-btn:hover { background: var(--mp-surface-alt); border-color: #8c8f94; }
-.ax-btn:focus-visible { box-shadow: 0 0 0 3px var(--mp-primary-focus); outline: none; }
-.ax-btn-primary {
-    background: var(--mp-primary);
-    border-color: var(--mp-primary);
-    color: var(--mp-text-inverse);
-}
-.ax-btn-primary:hover { background: var(--mp-primary-hover); border-color: var(--mp-primary-hover); color: #fff; }
-.ax-btn-danger {
-    border-color: var(--mp-error);
-    color: var(--mp-error);
-}
-.ax-btn-danger:hover { background: var(--mp-error); color: #fff; }
-.ax-btn-sm { padding: 4px 10px; font-size: var(--mp-font-sm); }
-
-/* ── Select ────────────────────────────────────── */
-.ax-select {
-    height: 32px;
-    padding: 4px 28px 4px 10px;
-    font-size: var(--mp-font-sm);
-    border: 1px solid var(--mp-border);
-    border-radius: var(--mp-radius-md);
-    background: var(--mp-surface);
-    color: var(--mp-text);
-    cursor: pointer;
-    appearance: none;
-    background-image: url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23646970' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10l-5 5z'/%3E%3C/svg%3E\");
-    background-repeat: no-repeat;
-    background-position: right 8px center;
-}
-.ax-select:focus-visible { border-color: var(--mp-primary); box-shadow: 0 0 0 2px var(--mp-primary-focus); outline: none; }
-
-/* ── Isolation Column Badges ──────────────────── */
 .ax-isolation-badge {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
+    gap: 5px;
     padding: 3px 10px 3px 6px;
     border-radius: 20px;
     font-size: 12px;
@@ -498,167 +341,47 @@ final class Axiom_Plugin_Security {
     border: 1px solid transparent;
 }
 .ax-isolation-badge svg { flex-shrink: 0; }
-.ax-isolation-badge-protected {
-    background: #edfaef;
-    color: #014010;
-    border-color: #b8e6bf;
-}
-.ax-isolation-badge-learning {
-    background: #fcf9e8;
-    color: #3d2502;
-    border-color: #f0dbb4;
-}
-.ax-isolation-badge-unprotected {
-    background: var(--mp-surface-alt);
-    color: var(--mp-text-muted);
-    border-color: var(--mp-border);
-}
-.ax-isolation-badge-disabled {
-    background: #f3f4f6;
-    color: #9ca3af;
-    border-color: var(--mp-border);
-}
+.ax-isolation-badge-protected { background: #edfaef; color: #014010; border-color: #b8e6bf; }
+.ax-isolation-badge-learning { background: #fcf9e8; color: #3d2502; border-color: #f0dbb4; }
+.ax-isolation-badge-unprotected { background: #f6f7f7; color: #646970; border-color: #dcdcde; }
+.ax-isolation-badge-disabled { background: #f0f0f1; color: #a7aaad; border-color: #dcdcde; }
 .ax-isolation-badge .ax-label { font-weight: 600; }
 .ax-isolation-badge .ax-sub { font-weight: 400; opacity: 0.75; }
 
-/* ── Profile Cards ────────────────────────────── */
 .ax-profile-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
-    gap: var(--mp-space-sm);
-    margin: var(--mp-space-sm) 0;
+    gap: 8px;
+    margin: 8px 0;
 }
 .ax-profile-card {
-    background: var(--mp-surface);
-    border: 2px solid var(--mp-border);
-    border-radius: var(--mp-radius-lg);
-    padding: var(--mp-space-md);
+    background: #fff;
+    border: 2px solid #dcdcde;
+    border-radius: 4px;
+    padding: 16px;
     cursor: pointer;
-    transition: all var(--mp-transition);
+    transition: all 150ms ease;
 }
-.ax-profile-card:hover {
-    border-color: var(--mp-primary);
-    box-shadow: 0 2px 8px rgba(34,113,177,0.12);
-}
-.ax-profile-card.selected {
-    border-color: var(--mp-primary);
-    background: #f0f6fc;
-}
-.ax-profile-card .ax-icon { font-size: 22px; margin-bottom: 6px; }
+.ax-profile-card:hover { border-color: #2271b1; box-shadow: 0 2px 8px rgba(34,113,177,0.12); }
+.ax-profile-card.selected { border-color: #2271b1; background: #f0f6fc; }
 .ax-profile-card h3 { margin: 0 0 2px; font-size: 14px; font-weight: 600; }
-.ax-profile-card p { margin: 0; font-size: 12px; color: var(--mp-text-muted); line-height: 1.4; }
-.ax-profile-card .ax-badge-rec {
-    display: inline-block;
-    background: var(--mp-primary);
-    color: #fff;
-    font-size: 10px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-    padding: 1px 6px;
-    border-radius: var(--mp-radius-sm);
-    margin-top: 6px;
-}
-.ax-profile-card .ax-cap-summary {
-    margin-top: 8px;
-    font-size: 11px;
-    color: var(--mp-text-muted);
-    line-height: 1.4;
-}
-/* Custom fields panel */
-.ax-custom-fields {
-    display: none;
-    margin-top: var(--mp-space-sm);
-    padding: var(--mp-space-md);
-    background: var(--mp-surface-alt);
-    border: 1px solid var(--mp-border);
-    border-radius: var(--mp-radius-lg);
-}
+.ax-profile-card p { margin: 0; font-size: 12px; color: #646970; line-height: 1.4; }
+
+.ax-custom-fields { display: none; margin-top: 8px; padding: 16px; background: #f6f7f7; border: 1px solid #dcdcde; border-radius: 4px; }
 .ax-custom-fields.visible { display: block; }
-.ax-custom-fields h4 {
-    margin: var(--mp-space-sm) 0 var(--mp-space-xs);
-    padding-bottom: 2px;
-    border-bottom: 1px solid var(--mp-border);
-    font-size: 13px;
-    color: var(--mp-text);
-}
-.ax-custom-fields .form-table th { width: 140px; padding: 4px 0; font-size: 12px; }
-.ax-custom-fields .form-table td { padding: 2px 0; }
-.ax-custom-fields .form-table input[type='text'],
-.ax-custom-fields .form-table input[type='number'] { font-size: 12px; width: 100%; }
 
-/* ── Edit Row ─────────────────────────────────── */
 .ax-edit-row > td { padding: 0 !important; background: transparent !important; }
-.ax-edit-inner {
-    padding: var(--mp-space-md) var(--mp-space-lg);
-    background: var(--mp-surface-alt);
-    border-top: 2px solid var(--mp-primary-focus);
-}
+.ax-edit-inner { padding: 16px 24px; background: #f6f7f7; border-top: 2px solid #72aee6; }
 
-/* ── Dashboard Widget ──────────────────────────── */
-.ax-dashboard-widget .ax-stat {
-    display: flex; justify-content: space-between;
-    padding: 8px 0; border-bottom: 1px solid var(--mp-border);
-}
-.ax-dashboard-widget .ax-stat:last-child { border-bottom: none; }
-
-/* ── Audit Table ───────────────────────────────── */
-.ax-audit-table { width: 100%; border-collapse: collapse; }
-.ax-audit-table th {
-    padding: 8px 10px; text-align: left;
-    border-bottom: 2px solid var(--mp-border);
-    font-size: 12px; font-weight: 600; text-transform: uppercase;
-    letter-spacing: 0.03em; color: var(--mp-text-muted);
-}
-.ax-audit-table td { padding: 8px 10px; border-bottom: 1px solid var(--mp-border); }
-.ax-audit-table tr:hover td { background: var(--mp-surface-alt); }
-.ax-audit-table .level-security { color: var(--mp-error); font-weight: 700; }
-.ax-audit-table .level-error { color: var(--mp-error); }
-.ax-audit-table .level-warning { color: #d97706; }
-.ax-audit-table .level-learning { color: var(--mp-primary); }
-.ax-audit-table .level-info { color: var(--mp-text-muted); }
-.ax-audit-table .context-json { font-size: 11px; color: var(--mp-text-muted); max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-
-/* ── Filter Bar ────────────────────────────────── */
 .ax-filter-bar {
     display: flex;
     align-items: center;
-    gap: var(--mp-space-sm);
-    padding: var(--mp-space-md);
-    background: var(--mp-surface-alt);
-    border: 1px solid var(--mp-border);
-    border-radius: var(--mp-radius-lg);
-    margin-bottom: var(--mp-space-md);
+    gap: 8px;
+    margin-bottom: 16px;
     flex-wrap: wrap;
 }
-.ax-filter-bar .ax-label { font-size: 12px; font-weight: 600; color: var(--mp-text-muted); }
+.ax-filter-bar .ax-label { font-size: 12px; font-weight: 600; color: #646970; }
 .ax-filter-bar .ax-spacer { flex: 1; }
-
-/* ── Input ─────────────────────────────────────── */
-.ax-input {
-    padding: 6px 10px;
-    font-size: var(--mp-font-sm);
-    border: 1px solid var(--mp-border);
-    border-radius: var(--mp-radius-md);
-    background: var(--mp-surface);
-    color: var(--mp-text);
-    line-height: 1.4;
-}
-.ax-input:focus { border-color: var(--mp-primary); box-shadow: 0 0 0 2px var(--mp-primary-focus); outline: none; }
-
-/* ── Table quick status ────────────────────────── */
-.ax-status-dot {
-    display: inline-block;
-    width: 8px; height: 8px;
-    border-radius: 50%;
-    margin-right: 6px;
-}
-.ax-status-dot-protected { background: var(--mp-success); }
-.ax-status-dot-learning { background: var(--mp-warning); }
-.ax-status-dot-unprotected { background: var(--mp-border); }
-
-/* ── No wrap utility ───────────────────────────── */
-.ax-nowrap { white-space: nowrap; }
 </style>";
 		echo $css;
 	}
@@ -738,12 +461,12 @@ final class Axiom_Plugin_Security {
 		$audit     = Axiom_Audit_Logger::instance();
 		$events    = $audit->count( array( 'level' => Axiom_Audit_Logger::SECURITY ) );
 
-		echo '<div class="ax-dashboard-widget">';
-		echo '<div class="ax-stat"><strong>' . __( 'Mode', 'default' ) . '</strong> <span>' . esc_html( ucfirst( $mode ) ) . '</span></div>';
-		echo '<div class="ax-stat"><strong>' . __( 'Active Plugins', 'default' ) . '</strong> <span>' . esc_html( (string) $total ) . '</span></div>';
-		echo '<div class="ax-stat"><strong>' . __( 'Protected', 'default' ) . '</strong> <span>' . esc_html( (string) $protected ) . '</span></div>';
-		echo '<div class="ax-stat"><strong>' . __( 'Security Events', 'default' ) . '</strong> <span>' . esc_html( (string) $events ) . '</span></div>';
-		echo '<p><a href="' . esc_url( admin_url( 'plugins.php?page=axiom-security' ) ) . '" class="button">' . __( 'Manage Plugin Security', 'default' ) . '</a></p>';
+		echo '<div style="padding:4px 0;">';
+		echo '<div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #dcdcde;"><strong>' . __( 'Mode', 'default' ) . '</strong> <span>' . esc_html( ucfirst( $mode ) ) . '</span></div>';
+		echo '<div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #dcdcde;"><strong>' . __( 'Active Plugins', 'default' ) . '</strong> <span>' . esc_html( (string) $total ) . '</span></div>';
+		echo '<div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #dcdcde;"><strong>' . __( 'Protected', 'default' ) . '</strong> <span>' . esc_html( (string) $protected ) . '</span></div>';
+		echo '<div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #dcdcde;"><strong>' . __( 'Security Events', 'default' ) . '</strong> <span>' . esc_html( (string) $events ) . '</span></div>';
+		echo '<p style="margin:12px 0 0;"><a href="' . esc_url( admin_url( 'plugins.php?page=axiom-security' ) ) . '" class="button">' . __( 'Manage Plugin Security', 'default' ) . '</a></p>';
 		echo '</div>';
 	}
 
@@ -843,14 +566,15 @@ final class Axiom_Plugin_Security {
 		}
 
 		?>
-		<div class="wrap ax-wrap">
-		<h1 class="mp-page-title"><?php esc_html_e( 'Plugin Security', 'default' ); ?></h1>
+		<div class="wrap">
 
-		<nav class="ax-tabs" aria-label="<?php esc_attr_e( 'Plugin Security sections', 'default' ); ?>">
-			<a href="<?php echo esc_url( add_query_arg( 'tab', 'dashboard', remove_query_arg( 'axiom_updated' ) ) ); ?>" class="ax-tab <?php echo $tab === 'dashboard' ? 'is-active' : ''; ?>"><?php esc_html_e( 'Dashboard', 'default' ); ?></a>
-			<a href="<?php echo esc_url( add_query_arg( 'tab', 'plugins', remove_query_arg( 'axiom_updated' ) ) ); ?>" class="ax-tab <?php echo $tab === 'plugins' ? 'is-active' : ''; ?>"><?php esc_html_e( 'Plugins', 'default' ); ?></a>
-			<a href="<?php echo esc_url( add_query_arg( 'tab', 'settings', remove_query_arg( 'axiom_updated' ) ) ); ?>" class="ax-tab <?php echo $tab === 'settings' ? 'is-active' : ''; ?>"><?php esc_html_e( 'Settings', 'default' ); ?></a>
-			<a href="<?php echo esc_url( add_query_arg( 'tab', 'audit', remove_query_arg( 'axiom_updated' ) ) ); ?>" class="ax-tab <?php echo $tab === 'audit' ? 'is-active' : ''; ?>"><?php esc_html_e( 'Audit Log', 'default' ); ?></a>
+		<h1><?php esc_html_e( 'Plugin Security', 'default' ); ?></h1>
+
+		<nav class="nav-tab-wrapper wp-clearfix" aria-label="<?php esc_attr_e( 'Plugin Security sections', 'default' ); ?>">
+			<a href="<?php echo esc_url( add_query_arg( 'tab', 'dashboard', remove_query_arg( 'axiom_updated' ) ) ); ?>" class="nav-tab <?php echo $tab === 'dashboard' ? 'nav-tab-active' : ''; ?>"><?php esc_html_e( 'Dashboard', 'default' ); ?></a>
+			<a href="<?php echo esc_url( add_query_arg( 'tab', 'plugins', remove_query_arg( 'axiom_updated' ) ) ); ?>" class="nav-tab <?php echo $tab === 'plugins' ? 'nav-tab-active' : ''; ?>"><?php esc_html_e( 'Plugins', 'default' ); ?></a>
+			<a href="<?php echo esc_url( add_query_arg( 'tab', 'settings', remove_query_arg( 'axiom_updated' ) ) ); ?>" class="nav-tab <?php echo $tab === 'settings' ? 'nav-tab-active' : ''; ?>"><?php esc_html_e( 'Settings', 'default' ); ?></a>
+			<a href="<?php echo esc_url( add_query_arg( 'tab', 'audit', remove_query_arg( 'axiom_updated' ) ) ); ?>" class="nav-tab <?php echo $tab === 'audit' ? 'nav-tab-active' : ''; ?>"><?php esc_html_e( 'Audit Log', 'default' ); ?></a>
 		</nav>
 
 		<?php
@@ -880,20 +604,20 @@ final class Axiom_Plugin_Security {
 		$sec_events = $audit->count( array( 'level' => Axiom_Audit_Logger::SECURITY ) );
 		?>
 		<div class="ax-stat-grid">
-			<div class="ax-stat-card">
-				<div class="ax-stat-label"><?php esc_html_e( 'Security Mode', 'default' ); ?></div>
+			<div class="card">
+				<p style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:#646970;margin:0 0 4px;"><?php esc_html_e( 'Security Mode', 'default' ); ?></p>
 				<div class="ax-stat-value"><?php echo esc_html( ucfirst( $mode ) ); ?></div>
-				<div class="ax-stat-desc"><?php echo $mode === 'enforce' ? esc_html__( 'Full enforcement active', 'default' ) : esc_html__( 'Controls how plugin security is enforced', 'default' ); ?></div>
+				<p style="font-size:13px;color:#646970;margin:4px 0 0;"><?php echo $mode === 'enforce' ? esc_html__( 'Full enforcement active', 'default' ) : esc_html__( 'Controls how plugin security is enforced', 'default' ); ?></p>
 			</div>
-			<div class="ax-stat-card">
-				<div class="ax-stat-label"><?php esc_html_e( 'Protected', 'default' ); ?></div>
+			<div class="card">
+				<p style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:#646970;margin:0 0 4px;"><?php esc_html_e( 'Protected', 'default' ); ?></p>
 				<div class="ax-stat-value"><?php echo esc_html( "{$protected} / {$total}" ); ?></div>
-				<div class="ax-stat-desc"><?php echo $protected > 0 ? esc_html( sprintf( __( '%d plugins have security manifests', 'default' ), $protected ) ) : esc_html__( 'No plugins have manifests yet', 'default' ); ?></div>
+				<p style="font-size:13px;color:#646970;margin:4px 0 0;"><?php echo $protected > 0 ? esc_html( sprintf( __( '%d plugins have security manifests', 'default' ), $protected ) ) : esc_html__( 'No plugins have manifests yet', 'default' ); ?></p>
 			</div>
-			<div class="ax-stat-card">
-				<div class="ax-stat-label"><?php esc_html_e( 'Total Events', 'default' ); ?></div>
+			<div class="card">
+				<p style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:#646970;margin:0 0 4px;"><?php esc_html_e( 'Total Events', 'default' ); ?></p>
 				<div class="ax-stat-value"><?php echo esc_html( (string) $events ); ?></div>
-				<div class="ax-stat-desc"><?php echo $sec_events > 0 ? esc_html( sprintf( __( '%d security events', 'default' ), $sec_events ) ) : esc_html__( 'All events logged', 'default' ); ?></div>
+				<p style="font-size:13px;color:#646970;margin:4px 0 0;"><?php echo $sec_events > 0 ? esc_html( sprintf( __( '%d security events', 'default' ), $sec_events ) ) : esc_html__( 'All events logged', 'default' ); ?></p>
 			</div>
 		</div>
 		<?php
@@ -906,12 +630,10 @@ final class Axiom_Plugin_Security {
 			return;
 		}
 		?>
-		<div class="ax-card">
-			<div class="ax-card-header">
-				<h2 class="ax-card-title"><?php esc_html_e( 'Plugin Status', 'default' ); ?></h2>
-			</div>
-			<div class="ax-card-body" style="padding:0;">
-				<table class="wp-list-table widefat fixed striped" style="border:none;">
+		<div class="card" style="max-width:none;">
+			<h2 class="title"><?php esc_html_e( 'Plugin Status', 'default' ); ?></h2>
+			<div style="margin:0 -2em -1em;">
+				<table class="wp-list-table widefat fixed striped">
 					<thead>
 						<tr>
 							<th><?php esc_html_e( 'Plugin', 'default' ); ?></th>
@@ -950,7 +672,7 @@ final class Axiom_Plugin_Security {
 				<tr>
 					<th><?php esc_html_e( 'Plugin', 'default' ); ?></th>
 					<th><?php esc_html_e( 'Manifest', 'default' ); ?></th>
-					<th><?php esc_html_e( 'Actions', 'default' ); ?></th>
+					<th style="text-align:right;"><?php esc_html_e( 'Actions', 'default' ); ?></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -971,46 +693,45 @@ final class Axiom_Plugin_Security {
 						<span class="ax-isolation-badge ax-isolation-badge-unprotected"><?php esc_html_e( 'None', 'default' ); ?></span>
 					<?php endif; ?>
 					</td>
-					<td>
+					<td style="text-align:right;white-space:nowrap;">
 					<?php if ( $has_manifest ) : ?>
-						<button type="button" class="ax-btn ax-btn-sm" onclick="document.getElementById('ax-edit-<?php echo esc_attr( $slug ); ?>').style.display='block'">
-							<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+						<button type="button" class="button button-small" onclick="document.getElementById('ax-edit-<?php echo esc_attr( $slug ); ?>').style.display='table-row'">
 							<?php esc_html_e( 'Edit', 'default' ); ?>
 						</button>
-						<form method="post" style="display:inline;">
+						<form method="post" style="display:inline-flex;align-items:center;gap:4px;">
 							<?php wp_nonce_field( 'axiom-generate-manifest' ); ?>
 							<input type="hidden" name="axiom_generate_manifest" value="1" />
 							<input type="hidden" name="axiom_plugin_slug" value="<?php echo esc_attr( $slug ); ?>" />
-							<select name="axiom_profile" class="ax-select" style="min-width:90px;">
+							<select name="axiom_profile" style="min-width:90px;font-size:12px;height:26px;">
 								<option value="<?php echo esc_attr( Axiom_Manifest::PROFILE_STANDARD ); ?>"><?php esc_html_e( 'Standard', 'default' ); ?></option>
 								<option value="<?php echo esc_attr( Axiom_Manifest::PROFILE_RESTRICTED ); ?>"><?php esc_html_e( 'Restricted', 'default' ); ?></option>
 								<option value="<?php echo esc_attr( Axiom_Manifest::PROFILE_PERMISSIVE ); ?>"><?php esc_html_e( 'Permissive', 'default' ); ?></option>
 							</select>
-							<button type="submit" class="ax-btn ax-btn-sm"><?php esc_html_e( 'Regen', 'default' ); ?></button>
+							<button type="submit" class="button button-small"><?php esc_html_e( 'Regen', 'default' ); ?></button>
 						</form>
-						<form method="post" style="display:inline;" onsubmit="return confirm('<?php echo esc_js( __( 'Delete this manifest?', 'default' ) ); ?>');">
+						<form method="post" style="display:inline-flex;align-items:center;gap:4px;" onsubmit="return confirm('<?php echo esc_js( __( 'Delete this manifest?', 'default' ) ); ?>');">
 							<?php wp_nonce_field( 'axiom-delete-manifest' ); ?>
 							<input type="hidden" name="axiom_delete_manifest" value="1" />
 							<input type="hidden" name="axiom_plugin_slug" value="<?php echo esc_attr( $slug ); ?>" />
-							<button type="submit" class="ax-btn ax-btn-sm ax-btn-danger"><?php esc_html_e( 'Delete', 'default' ); ?></button>
+							<button type="submit" class="button button-small" style="color:#d63638;border-color:#d63638;"><?php esc_html_e( 'Delete', 'default' ); ?></button>
 						</form>
 					<?php else : ?>
-						<form method="post" style="display:inline;">
+						<form method="post" style="display:inline-flex;align-items:center;gap:4px;">
 							<?php wp_nonce_field( 'axiom-generate-manifest' ); ?>
 							<input type="hidden" name="axiom_generate_manifest" value="1" />
 							<input type="hidden" name="axiom_plugin_slug" value="<?php echo esc_attr( $slug ); ?>" />
-							<select name="axiom_profile" class="ax-select" style="min-width:90px;">
+							<select name="axiom_profile" style="min-width:90px;font-size:12px;height:26px;">
 								<option value="<?php echo esc_attr( Axiom_Manifest::PROFILE_STANDARD ); ?>"><?php esc_html_e( 'Standard', 'default' ); ?></option>
 								<option value="<?php echo esc_attr( Axiom_Manifest::PROFILE_RESTRICTED ); ?>"><?php esc_html_e( 'Restricted', 'default' ); ?></option>
 								<option value="<?php echo esc_attr( Axiom_Manifest::PROFILE_PERMISSIVE ); ?>"><?php esc_html_e( 'Permissive', 'default' ); ?></option>
 							</select>
-							<button type="submit" class="ax-btn ax-btn-sm ax-btn-primary"><?php esc_html_e( 'Generate', 'default' ); ?></button>
+							<button type="submit" class="button button-primary button-small"><?php esc_html_e( 'Generate', 'default' ); ?></button>
 						</form>
 					<?php endif; ?>
 					</td>
 				</tr>
 				<?php if ( $has_manifest ) : ?>
-				<tr id="ax-edit-<?php echo esc_attr( $slug ); ?>" style="display:none;" class="ax-edit-row">
+				<tr id="ax-edit-<?php echo esc_attr( $slug ); ?>" class="ax-edit-row" style="display:none;">
 					<td colspan="3">
 						<div class="ax-edit-inner">
 							<?php $this->render_manifest_form( $slug, $manifest ); ?>
@@ -1028,36 +749,32 @@ final class Axiom_Plugin_Security {
 		$current  = self::mode();
 		$constant_overridden = self::mode_constant_defined();
 		?>
-		<div class="ax-card" style="max-width:640px;">
-			<div class="ax-card-header">
-				<h2 class="ax-card-title"><?php esc_html_e( 'Security Mode', 'default' ); ?></h2>
-			</div>
-			<div class="ax-card-body">
-				<?php if ( $constant_overridden ) : ?>
-					<div class="mp-notice mp-notice-info" style="margin-bottom:var(--mp-space-md);">
-						<?php echo esc_html( sprintf( __( 'Mode locked by wp-config.php constant (AXIOM_SECURITY_MODE = %s). Remove the constant to enable UI control.', 'default' ), AXIOM_SECURITY_MODE ) ); ?>
-					</div>
-				<?php endif; ?>
-				<form method="post">
-					<?php wp_nonce_field( 'axiom-save-mode' ); ?>
-					<label for="axiom_security_mode" style="display:block;font-weight:500;margin-bottom:6px;"><?php esc_html_e( 'Choose the security mode for all plugins:', 'default' ); ?></label>
-					<select name="axiom_security_mode" id="axiom_security_mode" class="ax-select" style="min-width:200px;" <?php disabled( $constant_overridden ); ?>>
-						<option value="learning" <?php selected( $current, 'learning' ); ?>><?php esc_html_e( 'Learning — Auto-configure manifests', 'default' ); ?></option>
-						<option value="audit" <?php selected( $current, 'audit' ); ?>><?php esc_html_e( 'Audit — Log violations, no blocking', 'default' ); ?></option>
-						<option value="enforce" <?php selected( $current, 'enforce' ); ?>><?php esc_html_e( 'Enforce — Block violations', 'default' ); ?></option>
-						<option value="disabled" <?php selected( $current, 'disabled' ); ?>><?php esc_html_e( 'Disabled — Turn off', 'default' ); ?></option>
-					</select>
-					<div style="margin-top:var(--mp-space-md);font-size:13px;color:var(--mp-text-muted);line-height:1.6;">
-						<strong style="color:var(--mp-text);"><?php esc_html_e( 'Learning', 'default' ); ?></strong> &mdash; <?php esc_html_e( 'Auto-generates manifests as plugins run. Best for onboarding.', 'default' ); ?><br>
-						<strong style="color:var(--mp-text);"><?php esc_html_e( 'Audit', 'default' ); ?></strong> &mdash; <?php esc_html_e( 'Checks manifests and logs violations without blocking. Safe for staging.', 'default' ); ?><br>
-						<strong style="color:var(--mp-text);"><?php esc_html_e( 'Enforce', 'default' ); ?></strong> &mdash; <?php esc_html_e( 'Full enforcement — violations are blocked and logged. Recommended for production.', 'default' ); ?><br>
-						<strong style="color:var(--mp-text);"><?php esc_html_e( 'Disabled', 'default' ); ?></strong> &mdash; <?php esc_html_e( 'System off. No monitoring or enforcement.', 'default' ); ?>
-					</div>
-					<div style="margin-top:var(--mp-space-md);">
-						<button type="submit" name="axiom_save_mode" class="ax-btn ax-btn-primary"><?php esc_html_e( 'Save Settings', 'default' ); ?></button>
-					</div>
-				</form>
-			</div>
+		<div class="card" style="max-width:640px;">
+			<h2 class="title"><?php esc_html_e( 'Security Mode', 'default' ); ?></h2>
+			<?php if ( $constant_overridden ) : ?>
+				<div class="notice notice-info inline" style="margin:0 0 16px;">
+					<p><?php echo esc_html( sprintf( __( 'Mode locked by wp-config.php constant (AXIOM_SECURITY_MODE = %s). Remove the constant to enable UI control.', 'default' ), AXIOM_SECURITY_MODE ) ); ?></p>
+				</div>
+			<?php endif; ?>
+			<form method="post">
+				<?php wp_nonce_field( 'axiom-save-mode' ); ?>
+				<label for="axiom_security_mode" style="display:block;font-weight:500;margin-bottom:6px;"><?php esc_html_e( 'Choose the security mode for all plugins:', 'default' ); ?></label>
+				<select name="axiom_security_mode" id="axiom_security_mode" style="min-width:200px;" <?php disabled( $constant_overridden ); ?>>
+					<option value="learning" <?php selected( $current, 'learning' ); ?>><?php esc_html_e( 'Learning — Auto-configure manifests', 'default' ); ?></option>
+					<option value="audit" <?php selected( $current, 'audit' ); ?>><?php esc_html_e( 'Audit — Log violations, no blocking', 'default' ); ?></option>
+					<option value="enforce" <?php selected( $current, 'enforce' ); ?>><?php esc_html_e( 'Enforce — Block violations', 'default' ); ?></option>
+					<option value="disabled" <?php selected( $current, 'disabled' ); ?>><?php esc_html_e( 'Disabled — Turn off', 'default' ); ?></option>
+				</select>
+				<div style="margin-top:16px;font-size:13px;color:#646970;line-height:1.6;">
+					<strong style="color:#1d2327;"><?php esc_html_e( 'Learning', 'default' ); ?></strong> &mdash; <?php esc_html_e( 'Auto-generates manifests as plugins run. Best for onboarding.', 'default' ); ?><br>
+					<strong style="color:#1d2327;"><?php esc_html_e( 'Audit', 'default' ); ?></strong> &mdash; <?php esc_html_e( 'Checks manifests and logs violations without blocking. Safe for staging.', 'default' ); ?><br>
+					<strong style="color:#1d2327;"><?php esc_html_e( 'Enforce', 'default' ); ?></strong> &mdash; <?php esc_html_e( 'Full enforcement — violations are blocked and logged. Recommended for production.', 'default' ); ?><br>
+					<strong style="color:#1d2327;"><?php esc_html_e( 'Disabled', 'default' ); ?></strong> &mdash; <?php esc_html_e( 'System off. No monitoring or enforcement.', 'default' ); ?>
+				</div>
+				<div style="margin-top:16px;">
+					<button type="submit" name="axiom_save_mode" class="button button-primary"><?php esc_html_e( 'Save Settings', 'default' ); ?></button>
+				</div>
+			</form>
 		</div>
 		<?php
 	}
@@ -1084,59 +801,55 @@ final class Axiom_Plugin_Security {
 		}
 		$total = $audit->count( $total_opts );
 		?>
-		<h2 class="mp-page-title" style="margin-top:0;"><?php esc_html_e( 'Audit Log', 'default' ); ?></h2>
-		<p class="mp-text-muted" style="margin:0 0 var(--mp-space-md);"><?php esc_html_e( 'Security events recorded by the plugin security system.', 'default' ); ?></p>
+		<h2 style="margin-top:20px;"><?php esc_html_e( 'Audit Log', 'default' ); ?></h2>
+		<p><?php esc_html_e( 'Security events recorded by the plugin security system.', 'default' ); ?></p>
 
 		<div class="ax-filter-bar">
 			<form method="get" style="display:flex;align-items:center;gap:8px;">
 				<input type="hidden" name="page" value="axiom-security" />
 				<input type="hidden" name="tab" value="audit" />
 				<span class="ax-label"><?php esc_html_e( 'Level:', 'default' ); ?></span>
-				<select name="ax_level" class="ax-select" onchange="this.form.submit()">
+				<select name="ax_level" onchange="this.form.submit()">
 				<?php foreach ( $level_labels as $val => $label ) : ?>
 					<option value="<?php echo esc_attr( $val ); ?>" <?php selected( $filter, $val ); ?>><?php echo esc_html( $label ); ?></option>
 				<?php endforeach; ?>
 				</select>
-				<noscript><button type="submit" class="ax-btn ax-btn-sm"><?php esc_html_e( 'Filter', 'default' ); ?></button></noscript>
+				<noscript><button type="submit" class="button button-small"><?php esc_html_e( 'Filter', 'default' ); ?></button></noscript>
 			</form>
 			<span class="ax-label" style="margin-left:8px;"><?php echo esc_html( sprintf( __( '%d events', 'default' ), $total ) ); ?></span>
 			<span class="ax-spacer"></span>
 			<form method="post" style="display:inline;" onsubmit="return confirm('<?php echo esc_js( __( 'Clear all audit log entries? This cannot be undone.', 'default' ) ); ?>');">
 				<?php wp_nonce_field( 'axiom-clear-audit' ); ?>
 				<input type="hidden" name="axiom_clear_audit" value="1" />
-				<button type="submit" class="ax-btn ax-btn-sm ax-btn-danger"><?php esc_html_e( 'Clear Log', 'default' ); ?></button>
+				<button type="submit" class="button button-small" style="color:#d63638;border-color:#d63638;"><?php esc_html_e( 'Clear Log', 'default' ); ?></button>
 			</form>
 		</div>
 
 		<?php if ( empty( $events ) ) : ?>
-			<div class="ax-card"><div class="ax-card-body mp-text-muted"><em><?php esc_html_e( 'No events recorded.', 'default' ); ?></em></div></div>
+			<p><em><?php esc_html_e( 'No events recorded.', 'default' ); ?></em></p>
 		<?php else : ?>
-			<div class="ax-card">
-				<div class="ax-card-body" style="padding:0;overflow-x:auto;">
-					<table class="ax-audit-table wp-list-table widefat fixed striped" style="border:none;">
-						<thead>
-							<tr>
-								<th><?php esc_html_e( 'Time', 'default' ); ?></th>
-								<th><?php esc_html_e( 'Level', 'default' ); ?></th>
-								<th><?php esc_html_e( 'Plugin', 'default' ); ?></th>
-								<th><?php esc_html_e( 'Event', 'default' ); ?></th>
-								<th><?php esc_html_e( 'Context', 'default' ); ?></th>
-							</tr>
-						</thead>
-						<tbody>
-						<?php foreach ( $events as $e ) : ?>
-							<tr>
-								<td class="ax-nowrap"><?php echo esc_html( $e['event_time'] ); ?></td>
-								<td class="level-<?php echo esc_attr( $e['level'] ); ?>"><?php echo esc_html( $e['level'] ); ?></td>
-								<td><code><?php echo esc_html( $e['plugin_slug'] ?? '&mdash;' ); ?></code></td>
-								<td><?php echo esc_html( $e['event_type'] ); ?><br><small class="mp-text-muted"><?php echo esc_html( $e['message'] ); ?></small></td>
-								<td class="context-json"><?php echo esc_html( $e['context'] ?? '' ); ?></td>
-							</tr>
-						<?php endforeach; ?>
-						</tbody>
-					</table>
-				</div>
-			</div>
+			<table class="wp-list-table widefat fixed striped" style="margin-top:10px;">
+				<thead>
+					<tr>
+						<th><?php esc_html_e( 'Time', 'default' ); ?></th>
+						<th><?php esc_html_e( 'Level', 'default' ); ?></th>
+						<th><?php esc_html_e( 'Plugin', 'default' ); ?></th>
+						<th><?php esc_html_e( 'Event', 'default' ); ?></th>
+						<th><?php esc_html_e( 'Context', 'default' ); ?></th>
+					</tr>
+				</thead>
+				<tbody>
+				<?php foreach ( $events as $e ) : ?>
+					<tr>
+						<td style="white-space:nowrap;"><?php echo esc_html( $e['event_time'] ); ?></td>
+						<td style="color:<?php echo $e['level'] === 'security' || $e['level'] === 'error' ? '#d63638' : ( $e['level'] === 'warning' ? '#d97706' : ( $e['level'] === 'learning' ? '#2271b1' : '#646970' ) ); ?>;font-weight:<?php echo $e['level'] === 'security' ? '700' : '400'; ?>;"><?php echo esc_html( $e['level'] ); ?></td>
+						<td><code><?php echo esc_html( $e['plugin_slug'] ?? '&mdash;' ); ?></code></td>
+						<td><?php echo esc_html( $e['event_type'] ); ?><br><small style="color:#646970;"><?php echo esc_html( $e['message'] ); ?></small></td>
+						<td style="font-size:12px;color:#646970;max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;"><?php echo esc_html( $e['context'] ?? '' ); ?></td>
+					</tr>
+				<?php endforeach; ?>
+				</tbody>
+			</table>
 		<?php endif; ?>
 		<?php
 	}
@@ -1149,7 +862,6 @@ final class Axiom_Plugin_Security {
 		$data     = $manifest->to_array();
 		$perms    = $data['permissions'] ?? array();
 		$limits   = $data['resource_limits'] ?? array();
-		$isolation = $data['isolation'] ?? 'namespace';
 		$db       = $perms['db'] ?? array();
 		$hook_list = $perms['wp']['hooks'] ?? array();
 		$opt      = $perms['wp']['options'] ?? array();
@@ -1208,19 +920,6 @@ final class Axiom_Plugin_Security {
 				</div>
 
 				<div class="ax-custom-fields <?php echo $current_profile === Axiom_Manifest::PROFILE_CUSTOM ? 'visible' : ''; ?>" id="ax-custom-<?php echo esc_attr( $slug ); ?>">
-					<h4><?php esc_html_e( 'Isolation', 'default' ); ?></h4>
-					<table class="form-table">
-						<tr>
-							<th scope="row"><label><?php esc_html_e( 'Isolation Mode', 'default' ); ?></label></th>
-							<td>
-								<select id="ax-isolation-<?php echo esc_attr( $slug ); ?>">
-									<option value="namespace" <?php selected( $isolation, 'namespace' ); ?>><?php esc_html_e( 'Namespace (PHP)', 'default' ); ?></option>
-									<option value="wasm" <?php selected( $isolation, 'wasm' ); ?>><?php esc_html_e( 'Wasm / V8', 'default' ); ?></option>
-								</select>
-							</td>
-						</tr>
-					</table>
-
 					<h4><?php esc_html_e( 'Database', 'default' ); ?></h4>
 					<table class="form-table">
 						<tr><th scope="row"><?php esc_html_e( 'Read', 'default' ); ?></th><td><input type="text" id="ax-db-read-<?php echo esc_attr( $slug ); ?>" class="large-text" value="<?php echo esc_attr( implode( ', ', $db['read'] ?? array() ) ); ?>" placeholder="wp_*" /></td></tr>
@@ -1293,7 +992,6 @@ final class Axiom_Plugin_Security {
 							name: name,
 							manifest_version: '1.0',
 							profile: 'custom',
-							isolation: document.getElementById('ax-isolation-' + slug).value,
 							permissions: {
 								db: {
 									read: (document.getElementById('ax-db-read-' + slug).value || '').split(',').map(function(s) { return s.trim(); }).filter(Boolean),
@@ -1329,8 +1027,8 @@ final class Axiom_Plugin_Security {
 				</script>
 
 				<p style="margin:8px 0 0 0;">
-					<button type="submit" class="ax-btn ax-btn-primary"><?php esc_html_e( 'Save Manifest', 'default' ); ?></button>
-					<button type="button" class="ax-btn" onclick="document.getElementById('ax-edit-<?php echo esc_attr( $slug ); ?>').style.display='none'"><?php esc_html_e( 'Cancel', 'default' ); ?></button>
+					<button type="submit" class="button button-primary"><?php esc_html_e( 'Save Manifest', 'default' ); ?></button>
+					<button type="button" class="button" onclick="document.getElementById('ax-edit-<?php echo esc_attr( $slug ); ?>').style.display='none'"><?php esc_html_e( 'Cancel', 'default' ); ?></button>
 				</p>
 			</form>
 		</div>

@@ -3,10 +3,10 @@
 > **Note:** This fork was an experiment to explore sandboxing WordPress plugins — keeping each plugin in its own protected space so it can't interfere with others, access unauthorized data, or crash your site. The core idea: every plugin gets a "permission slip" (called a manifest) that defines exactly what it's allowed to do.
 
 <div align="center">
-  <img src="https://i.postimg.cc/rwp6VLm0/Screenshot-2026-04-28-204039.png" alt="Axiom Dashboard" width="23%" />
-  <img src="https://i.postimg.cc/qv7fJdRN/Screenshot-2026-04-28-204103.png" alt="Axiom Settings" width="23%" />
-  <img src="https://i.postimg.cc/BnvWSG68/Screenshot-2026-04-28-204125.png" alt="Axiom Plugins" width="23%" />
-  <img src="https://i.postimg.cc/zGfmz1BR/Screenshot-2026-04-28-204632.png" alt="Axiom Audit Log" width="23%" />
+  <img src="https://i.postimg.cc/05Jjb68p/Screenshot-2026-04-29-134203.png" alt="Axiom Dashboard" width="23%" />
+  <img src="https://i.postimg.cc/66Gqy79C/Screenshot-2026-04-29-134210.png" alt="Axiom Settings" width="23%" />
+  <img src="https://i.postimg.cc/2jByVqzF/Screenshot-2026-04-29-134217.png" alt="Axiom Plugins" width="23%" />
+  <img src="https://i.postimg.cc/CMf5zZFC/Screenshot-2026-04-29-134224.png" alt="Axiom Audit Log" width="23%" />
 </div>
 
 Axiom is a security-focused version of WordPress that safely runs plugins
