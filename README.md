@@ -74,50 +74,6 @@ No more "white screen of death" because one plugin went haywire.
 | An agency | Running multiple client sites with confidence that plugins won't clash |
 | Anyone | Knowing that plugins only do what you approved them to do |
 
-## Getting Started
-
-### 1. Install Normally
-
-Axiom works like regular WordPress. Upload it to your server, create your database, and run the installer.
-
-### 2. Enable Learning Mode (Recommended First Step)
-
-Add this line to your `wp-config.php` file:
-
-```php
-define('AXIOM_SECURITY_MODE', 'learning');
-```
-
-This tells Axiom to watch your plugins and take notes without blocking anything. Use your site normally and exercise all your plugins' features.
-
-### 3. Review the Manifests
-
-After using your site with Learning Mode enabled, check the manifests Axiom created. They are stored in the WordPress options table and visible under **Plugins → Plugin Security** in the admin dashboard. Each manifest is a simple list of what that plugin did while being watched.
-
-### 4. Turn On Protection
-
-When you're satisfied with the manifests, switch to enforcement mode:
-
-```php
-define('AXIOM_SECURITY_MODE', 'enforce');
-```
-
-Now Axiom will block any plugin activity that isn't on its approved list. Violations are recorded in the audit log so you can adjust the manifest.
-
-### Step-by-Step Quick Start
-
-```
-1. Upload Axiom files to your server
-2. Run the WordPress installer as usual
-3. Add this to wp-config.php:
-   define('AXIOM_SECURITY_MODE', 'learning');
-4. Use your site for a few days
-5. Review manifests under Plugins → Plugin Security in the admin
-6. Update wp-config.php to:
-   define('AXIOM_SECURITY_MODE', 'enforce');
-7. Check the audit log under Plugins → Plugin Security → Audit Log
-```
-
 ## Admin Dashboard
 
 Axiom includes a full admin page under **Plugins → Plugin Security** in your WordPress admin. It has four tabs:
@@ -170,7 +126,7 @@ wp-includes/class-wp-hook.php        ← Tracks which plugin registered each
 | `enforce` | Blocks unapproved actions, records everything |
 | `disabled` | Runs like regular WordPress (no security layer) |
 
-You can change modes anytime by editing `wp-config.php` or via the **Plugin Security → Settings** admin page. No need to reinstall or restart anything.
+New installs start in learning mode by default. You can change modes anytime under **Plugins → Plugin Security → Settings** in the admin, or by setting `AXIOM_SECURITY_MODE` in `wp-config.php` to override.
 
 ## Trusted Plugins
 
