@@ -30,6 +30,9 @@ Thumbs.db
 # Logs
 wp-content/axiom/audit-*.log
 
+# Playwright MCP
+.playwright-mcp/
+
 # IDE
 .vscode/
 .idea/
