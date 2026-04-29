@@ -29,22 +29,19 @@ class Proxy_WPDB extends \wpdb
     private DatabaseProxy $proxy;
 
     /**
-     * Properties that must mirror the inner wpdb state.
+     * Delegate property access to the inner wpdb instance.
      */
-    public function __get( string $name ): mixed
+    public function __get( $name )
     {
-        if ( $name === 'inner' ) {
-            return $this->inner;
-        }
-        return $this->inner->$name ?? null;
+        return $this->inner->$name;
     }
 
-    public function __set( string $name, mixed $value ): void
+    public function __set( $name, $value ): void
     {
         $this->inner->$name = $value;
     }
 
-    public function __isset( string $name ): bool
+    public function __isset( $name ): bool
     {
         return isset( $this->inner->$name );
     }
@@ -57,54 +54,12 @@ class Proxy_WPDB extends \wpdb
     {
         $this->inner = $original;
         $this->proxy = $proxy;
-
-        $this->dbh        = &$original->dbh;
-        $this->result     = &$original->result;
-        $this->last_result = &$original->last_result;
-        $this->last_query  = &$original->last_query;
-
-        $this->col_meta   = &$original->col_meta;
-        $this->queries    = &$original->queries;
-        $this->num_rows   = &$original->num_rows;
-        $this->insert_id  = &$original->insert_id;
-        $this->rows_affected = &$original->rows_affected;
-        $this->num_queries   = &$original->num_queries;
-        $this->last_error    = &$original->last_error;
-        $this->error   = &$original->error;
-        $this->field_types  = &$original->field_types;
-        $this->charset      = &$original->charset;
-        $this->collate      = &$original->collate;
-        $this->ready        = &$original->ready;
-        $this->has_connected = &$original->has_connected;
-        $this->blogid       = &$original->blogid;
-        $this->siteid       = &$original->siteid;
-        $this->tables       = &$original->tables;
-        $this->old_tables   = &$original->old_tables;
-        $this->dbuser      = &$original->dbuser;
-        $this->dbpassword  = &$original->dbpassword;
-        $this->dbname      = &$original->dbname;
-        $this->dbhost      = &$original->dbhost;
-        $this->dbcharset   = &$original->dbcharset;
-        $this->dbcollate   = &$original->dbcollate;
-        $this->prefix      = &$original->prefix;
-        $this->base_prefix = &$original->base_prefix;
-        $this->timezone    = &$original->timezone;
-        $this->allowed_charset = &$original->allowed_charset;
-        $this->current_charset = &$original->current_charset;
-        $this->check_current_charset = &$original->check_current_charset;
-        $this->func_call   = &$original->func_call;
-        $this->is_mysql    = &$original->is_mysql;
-        $this->use_mysqli  = &$original->use_mysqli;
-
-        if ( defined( 'SAVEQUERIES' ) && SAVEQUERIES ) {
-            $this->queries = &$original->queries;
-        }
     }
 
     /**
      * Intercept the primary query method.
      */
-    public function query( string $query ): int|false
+    public function query( $query ): int|false
     {
         $intercepted = $this->proxy->intercept( $query );
 
@@ -119,7 +74,7 @@ class Proxy_WPDB extends \wpdb
     /**
      * Proxy: insert
      */
-    public function insert( string $table, array $data, array|string|null $format = null ): int|false
+    public function insert( $table, $data, $format = null ): int|false
     {
         $intercepted = $this->proxy->intercept( "INSERT INTO {$table}" );
         if ( $intercepted === '' ) {
@@ -132,7 +87,7 @@ class Proxy_WPDB extends \wpdb
     /**
      * Proxy: update
      */
-    public function update( string $table, array $data, array $where, array|string|null $format = null, array|string|null $where_format = null ): int|false
+    public function update( $table, $data, $where, $format = null, $where_format = null ): int|false
     {
         $intercepted = $this->proxy->intercept( "UPDATE {$table}" );
         if ( $intercepted === '' ) {
@@ -145,7 +100,7 @@ class Proxy_WPDB extends \wpdb
     /**
      * Proxy: replace
      */
-    public function replace( string $table, array $data, array|string|null $format = null ): int|false
+    public function replace( $table, $data, $format = null ): int|false
     {
         $intercepted = $this->proxy->intercept( "REPLACE {$table}" );
         if ( $intercepted === '' ) {
@@ -158,7 +113,7 @@ class Proxy_WPDB extends \wpdb
     /**
      * Proxy: delete
      */
-    public function delete( string $table, array $where, array|string|null $where_format = null ): int|false
+    public function delete( $table, $where, $where_format = null ): int|false
     {
         $intercepted = $this->proxy->intercept( "DELETE FROM {$table}" );
         if ( $intercepted === '' ) {
@@ -243,7 +198,7 @@ class Proxy_WPDB extends \wpdb
     /**
      * Delegate esc_like directly.
      */
-    public function esc_like( string $text ): string
+    public function esc_like( $text ): string
     {
         return $this->inner->esc_like( $text );
     }
@@ -251,7 +206,7 @@ class Proxy_WPDB extends \wpdb
     /**
      * Delegate flush directly.
      */
-    public function flush( bool $flush = true ): void
+    public function flush( $flush = true ): void
     {
         $this->inner->flush( $flush );
     }
@@ -259,7 +214,7 @@ class Proxy_WPDB extends \wpdb
     /**
      * Delegate db_connect directly.
      */
-    public function db_connect( bool $allow_bail = true ): void
+    public function db_connect( $allow_bail = true ): void
     {
         $this->inner->db_connect( $allow_bail );
     }
@@ -291,7 +246,7 @@ class Proxy_WPDB extends \wpdb
     /**
      * Delegate print_error directly.
      */
-    public function print_error( string $str = '' ): void
+    public function print_error( $str = '' ): void
     {
         $this->inner->print_error( $str );
     }
@@ -299,7 +254,7 @@ class Proxy_WPDB extends \wpdb
     /**
      * Delegate show_errors / hide_errors directly.
      */
-    public function show_errors( bool $show = true ): bool
+    public function show_errors( $show = true ): bool
     {
         return $this->inner->show_errors( $show );
     }
@@ -309,7 +264,7 @@ class Proxy_WPDB extends \wpdb
         return $this->inner->hide_errors();
     }
 
-    public function suppress_errors( bool $suppress = true ): bool
+    public function suppress_errors( $suppress = true ): bool
     {
         return $this->inner->suppress_errors( $suppress );
     }
@@ -341,7 +296,7 @@ class Proxy_WPDB extends \wpdb
     /**
      * Delegate has_cap directly.
      */
-    public function has_cap( string $db_cap ): bool
+    public function has_cap( $db_cap ): bool
     {
         return $this->inner->has_cap( $db_cap );
     }
@@ -357,7 +312,7 @@ class Proxy_WPDB extends \wpdb
     /**
      * Delegate table_exists directly.
      */
-    public function table_exists( string $table ): bool
+    public function table_exists( $table ): bool
     {
         return $this->inner->table_exists( $table );
     }
@@ -365,7 +320,7 @@ class Proxy_WPDB extends \wpdb
     /**
      * Delegate get_table_from_query directly.
      */
-    public function get_table_from_query( string $query ): string|false
+    public function get_table_from_query( $query ): string|false
     {
         return $this->inner->get_table_from_query( $query );
     }
@@ -394,18 +349,15 @@ class Proxy_WPDB extends \wpdb
         $this->inner->__wakeup();
     }
 
-    /**
-     * Delegate __sleep directly.
-     */
     public function __sleep(): array
     {
-        return $this->inner->__sleep();
+        return array_merge( $this->inner->__sleep(), [ 'inner', 'proxy' ] );
     }
 
     /**
      * Delegate bail_handler directly.
      */
-    public function bail_handler( string $message ): void
+    public function bail_handler( $message ): void
     {
         $this->inner->bail_handler( $message );
     }
@@ -413,7 +365,7 @@ class Proxy_WPDB extends \wpdb
     /**
      * Delegate check_connection directly.
      */
-    public function check_connection( bool $allow_bail = true ): void
+    public function check_connection( $allow_bail = true ): void
     {
         $this->inner->check_connection( $allow_bail );
     }
@@ -429,7 +381,7 @@ class Proxy_WPDB extends \wpdb
     /**
      * Delegate get_col_info directly.
      */
-    public function get_col_info( string $info_type = 'name', int $col_offset = -1 ): array|object|null
+    public function get_col_info( $info_type = 'name', $col_offset = -1 ): array|object|null
     {
         return $this->inner->get_col_info( $info_type, $col_offset );
     }
@@ -440,13 +392,5 @@ class Proxy_WPDB extends \wpdb
     public function __call( string $name, array $arguments ): mixed
     {
         return $this->inner->$name( ...$arguments );
-    }
-
-    /**
-     * Delegate static methods.
-     */
-    public static function __callStatic( string $name, array $arguments ): mixed
-    {
-        return \wpdb::$name( ...$arguments );
     }
 }

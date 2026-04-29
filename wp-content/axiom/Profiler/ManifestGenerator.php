@@ -70,7 +70,7 @@ final class ManifestGenerator
     {
         $dir = dirname( $file );
         if ( ! is_dir( $dir ) ) {
-            wp_mkdir_p( $dir );
+            \wp_mkdir_p( $dir );
         }
 
         $json = json_encode( $manifest, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE );

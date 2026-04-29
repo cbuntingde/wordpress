@@ -1,6 +1,6 @@
 {
-    "id": "hello",
-    "name": "hello",
+    "id": "axiom-guard",
+    "name": "axiom-guard",
     "manifest_version": "1.0",
     "isolation": "namespace",
     "permissions": {

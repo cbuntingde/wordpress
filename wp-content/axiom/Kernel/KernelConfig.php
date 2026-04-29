@@ -45,7 +45,8 @@ final class KernelConfig
     }
 
     /**
-     * Load configuration from PHP constants, axiom-config.php, and environment.
+     * Load configuration from PHP constants, axiom-config.php,
+     * axiom_settings DB option, and environment.
      */
     public static function load(): self
     {
@@ -54,6 +55,15 @@ final class KernelConfig
 
         if ( file_exists( $config_file ) ) {
             $options = (array) include $config_file;
+        }
+
+        // DB settings (admin UI) fill in gaps the config file didn't set.
+        // Only merge when the option system is fully bootstrapped (wp_cache_available).
+        if ( function_exists( 'get_option' ) && function_exists( 'wp_cache_get' ) ) {
+            $db_settings = \get_option( 'axiom_settings', [] );
+            if ( is_array( $db_settings ) && $db_settings !== [] ) {
+                $options = array_merge( $options, $db_settings );
+            }
         }
 
         $options['mode']            = defined( 'AXIOM_MODE' )

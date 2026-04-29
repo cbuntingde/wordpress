@@ -15,7 +15,7 @@ namespace Axiom;
 
 use Axiom\Kernel\Kernel;
 
-const AXIOM_KERNEL_VERSION = '1.0.0';
+const AXIOM_KERNEL_VERSION = '1.0.1';
 const AXIOM_KERNEL_DIR     = __DIR__;
 
 spl_autoload_register( static function ( string $class ): void {
@@ -35,12 +35,27 @@ spl_autoload_register( static function ( string $class ): void {
 if ( ! defined( 'AXIOM_LOADED' ) ) {
     define( 'AXIOM_LOADED', true );
 
-    Kernel::get_instance()->init();
+    \add_action( 'plugins_loaded', static function (): void {
+        Kernel::get_instance()->init();
 
-    // Lazy-load admin dashboard when in wp-admin.
-    if ( is_admin() ) {
-        add_action( 'admin_init', static function (): void {
-            \Axiom\Admin\Admin::get_instance()->init();
-        }, 0 );
-    }
+        $admin = \Axiom\Admin\Admin::get_instance();
+
+        // Register AJAX handlers early — plugins_loaded fires for all
+        // requests including admin-ajax.php (admin_init does not).
+        $admin->register_ajax_handlers();
+
+        if ( \is_admin() ) {
+            // Register menus at plugins_loaded — admin_menu fires before
+            // admin_init in this fork (see wp-admin/admin.php:163 vs 180).
+            \add_action( 'admin_menu', [ $admin, 'register_menus' ], 9 );
+
+            // Add isolation column to native plugins list table.
+            $admin->register_plugin_list_column();
+
+            // All other admin hooks (asset enqueue) on admin_init.
+            \add_action( 'admin_init', static function () use ( $admin ): void {
+                $admin->init();
+            }, 0 );
+        }
+    }, 0 );
 }

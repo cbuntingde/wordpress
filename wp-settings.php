@@ -596,9 +596,13 @@ foreach ( wp_get_active_and_valid_plugins() as $plugin ) {
 	// The Kernel loads the blueprint.json manifest and assigns
 	// an isolate context for execution monitoring.
 	if ( defined( 'AXIOM_LOADED' ) && AXIOM_LOADED ) {
-		$plugin_slug = basename( dirname( $plugin ) );
+		$plugin_dir  = \dirname( $plugin );
+		$plugin_slug = \basename( $plugin_dir );
+		if ( $plugin_dir === WP_PLUGIN_DIR ) {
+			$plugin_slug = \basename( $plugin, '.php' );
+		}
 		$kernel      = \Axiom\Kernel\Kernel::get_instance();
-		$context     = $kernel->register_plugin( $plugin_slug ?: basename( $plugin, '.php' ), $plugin );
+		$context     = $kernel->register_plugin( $plugin_slug, $plugin );
 
 		// Register all callbacks this plugin will add so the
 		// HookMarshaller can attribute them to the correct isolate.

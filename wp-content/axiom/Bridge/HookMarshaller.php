@@ -82,7 +82,7 @@ final class HookMarshaller
 
         $marshaller = $this;
 
-        add_filter( 'axiom_register_callback', function ( string $plugin_slug, callable $callback ) use ( $marshaller ): void {
+        \add_filter( 'axiom_register_callback', function ( string $plugin_slug, callable $callback ) use ( $marshaller ): void {
             $marshaller->register_callback( $plugin_slug, $callback );
         }, 10, 2 );
 

@@ -1,0 +1,18 @@
+{
+    "id": "axiom-debug",
+    "name": "axiom-debug",
+    "manifest_version": "1.0",
+    "isolation": "process",
+    "permissions": {
+        "db": {
+            "read": [
+                "wp_options",
+                "wp_posts"
+            ]
+        }
+    },
+    "resource_limits": {
+        "cpu_ms": "500",
+        "memory_mb": "64"
+    }
+}

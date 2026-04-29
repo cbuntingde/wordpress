@@ -1,5 +1,12 @@
 # Axiom: A Safer WordPress
 
+<div align="center">
+  <img src="https://i.postimg.cc/rwp6VLm0/Screenshot-2026-04-28-204039.png" alt="Axiom Dashboard" width="23%" />
+  <img src="https://i.postimg.cc/qv7fJdRN/Screenshot-2026-04-28-204103.png" alt="Axiom Settings" width="23%" />
+  <img src="https://i.postimg.cc/BnvWSG68/Screenshot-2026-04-28-204125.png" alt="Axiom Plugins" width="23%" />
+  <img src="https://i.postimg.cc/zGfmz1BR/Screenshot-2026-04-28-204632.png" alt="Axiom Audit Log" width="23%" />
+</div>
+
 Axiom is a security-focused version of WordPress that safely runs plugins
 in their own protected spaces so they can't interfere with each other, access
 things they shouldn't, or crash your site.

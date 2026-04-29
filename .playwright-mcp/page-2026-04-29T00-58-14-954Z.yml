@@ -1,0 +1,367 @@
+- generic [ref=e2]:
+  - navigation "Main menu":
+    - link "Skip to main content" [ref=e3] [cursor=pointer]:
+      - /url: "#wpbody-content"
+    - link "Skip to toolbar" [ref=e4] [cursor=pointer]:
+      - /url: "#wp-toolbar"
+    - list [ref=e7]:
+      - listitem [ref=e8]:
+        - link "Dashboard" [ref=e9] [cursor=pointer]:
+          - /url: index.php
+          - generic [ref=e10]: 
+          - generic [ref=e11]: Dashboard
+        - list [ref=e12]:
+          - listitem [ref=e13]: Dashboard
+          - listitem [ref=e14]:
+            - link "Home" [ref=e15] [cursor=pointer]:
+              - /url: index.php
+          - listitem [ref=e16]:
+            - link "Updates 1" [ref=e17] [cursor=pointer]:
+              - /url: update-core.php
+              - text: Updates
+              - generic [ref=e18]: "1"
+      - listitem [ref=e19]
+      - listitem [ref=e21]:
+        - link "Posts" [ref=e22] [cursor=pointer]:
+          - /url: edit.php
+          - generic [ref=e23]: 
+          - generic [ref=e24]: Posts
+        - list [ref=e25]:
+          - listitem [ref=e26]: Posts
+          - listitem [ref=e27]:
+            - link "All Posts" [ref=e28] [cursor=pointer]:
+              - /url: edit.php
+          - listitem [ref=e29]:
+            - link "Add Post" [ref=e30] [cursor=pointer]:
+              - /url: post-new.php
+          - listitem [ref=e31]:
+            - link "Categories" [ref=e32] [cursor=pointer]:
+              - /url: edit-tags.php?taxonomy=category
+          - listitem [ref=e33]:
+            - link "Tags" [ref=e34] [cursor=pointer]:
+              - /url: edit-tags.php?taxonomy=post_tag
+      - listitem [ref=e35]:
+        - link "Media" [ref=e36] [cursor=pointer]:
+          - /url: upload.php
+          - generic [ref=e37]: 
+          - generic [ref=e38]: Media
+        - list [ref=e39]:
+          - listitem [ref=e40]: Media
+          - listitem [ref=e41]:
+            - link "Library" [ref=e42] [cursor=pointer]:
+              - /url: upload.php
+          - listitem [ref=e43]:
+            - link "Add Media File" [ref=e44] [cursor=pointer]:
+              - /url: media-new.php
+      - listitem [ref=e45]:
+        - link "Pages" [ref=e46] [cursor=pointer]:
+          - /url: edit.php?post_type=page
+          - generic [ref=e47]: 
+          - generic [ref=e48]: Pages
+        - list [ref=e49]:
+          - listitem [ref=e50]: Pages
+          - listitem [ref=e51]:
+            - link "All Pages" [ref=e52] [cursor=pointer]:
+              - /url: edit.php?post_type=page
+          - listitem [ref=e53]:
+            - link "Add Page" [ref=e54] [cursor=pointer]:
+              - /url: post-new.php?post_type=page
+      - listitem [ref=e55]:
+        - link "Comments" [ref=e56] [cursor=pointer]:
+          - /url: edit-comments.php
+          - generic [ref=e57]: 
+          - generic [ref=e58]: Comments
+      - listitem [ref=e59]
+      - listitem [ref=e61]:
+        - link "Appearance" [ref=e62] [cursor=pointer]:
+          - /url: themes.php
+          - generic [ref=e63]: 
+          - generic [ref=e64]: Appearance
+        - list [ref=e65]:
+          - listitem [ref=e66]: Appearance
+          - listitem [ref=e67]:
+            - link "Themes" [ref=e68] [cursor=pointer]:
+              - /url: themes.php
+          - listitem [ref=e69]:
+            - link "Editor" [ref=e70] [cursor=pointer]:
+              - /url: site-editor.php
+      - listitem [ref=e71]:
+        - link "Plugins 1" [ref=e72] [cursor=pointer]:
+          - /url: plugins.php
+          - generic [ref=e73]: 
+          - generic [ref=e74]:
+            - text: Plugins
+            - generic [ref=e75]: "1"
+        - list [ref=e76]:
+          - listitem [ref=e77]:
+            - text: Plugins
+            - generic [ref=e78]: "1"
+          - listitem [ref=e79]:
+            - link "Installed Plugins" [ref=e80] [cursor=pointer]:
+              - /url: plugins.php
+          - listitem [ref=e81]:
+            - link "Add Plugin" [ref=e82] [cursor=pointer]:
+              - /url: plugin-install.php
+      - listitem [ref=e83]:
+        - link "Plugin Security" [ref=e84] [cursor=pointer]:
+          - /url: admin.php?page=axiom-security
+          - generic [ref=e85]: 
+          - generic [ref=e86]: Plugin Security
+        - list [ref=e87]:
+          - listitem [ref=e88]: Plugin Security
+          - listitem [ref=e89]:
+            - link "Dashboard" [ref=e90] [cursor=pointer]:
+              - /url: admin.php?page=axiom-security
+          - listitem [ref=e91]:
+            - link "Settings" [ref=e92] [cursor=pointer]:
+              - /url: admin.php?page=axiom-settings
+          - listitem [ref=e93]:
+            - link "Plugins" [ref=e94] [cursor=pointer]:
+              - /url: admin.php?page=axiom-plugins
+          - listitem [ref=e95]:
+            - link "Audit Log" [ref=e96] [cursor=pointer]:
+              - /url: admin.php?page=axiom-audit-log
+      - listitem [ref=e97]:
+        - link "Users" [ref=e98] [cursor=pointer]:
+          - /url: users.php
+          - generic [ref=e99]: 
+          - generic [ref=e100]: Users
+        - list [ref=e101]:
+          - listitem [ref=e102]: Users
+          - listitem [ref=e103]:
+            - link "All Users" [ref=e104] [cursor=pointer]:
+              - /url: users.php
+          - listitem [ref=e105]:
+            - link "Add User" [ref=e106] [cursor=pointer]:
+              - /url: user-new.php
+          - listitem [ref=e107]:
+            - link "Profile" [ref=e108] [cursor=pointer]:
+              - /url: profile.php
+      - listitem [ref=e109]:
+        - link "Tools" [ref=e110] [cursor=pointer]:
+          - /url: tools.php
+          - generic [ref=e111]: 
+          - generic [ref=e112]: Tools
+        - list [ref=e113]:
+          - listitem [ref=e114]: Tools
+          - listitem [ref=e115]:
+            - link "Available Tools" [ref=e116] [cursor=pointer]:
+              - /url: tools.php
+          - listitem [ref=e117]:
+            - link "Import" [ref=e118] [cursor=pointer]:
+              - /url: import.php
+          - listitem [ref=e119]:
+            - link "Export" [ref=e120] [cursor=pointer]:
+              - /url: export.php
+          - listitem [ref=e121]:
+            - link "Site Health" [ref=e122] [cursor=pointer]:
+              - /url: site-health.php
+          - listitem [ref=e123]:
+            - link "Export Personal Data" [ref=e124] [cursor=pointer]:
+              - /url: export-personal-data.php
+          - listitem [ref=e125]:
+            - link "Erase Personal Data" [ref=e126] [cursor=pointer]:
+              - /url: erase-personal-data.php
+          - listitem [ref=e127]:
+            - link "Axiom Debug" [ref=e128] [cursor=pointer]:
+              - /url: tools.php?page=axiom-debug
+          - listitem [ref=e129]:
+            - link "Demo Content" [ref=e130] [cursor=pointer]:
+              - /url: tools.php?page=joyful-demo-content
+      - listitem [ref=e131]:
+        - link "Settings" [ref=e132] [cursor=pointer]:
+          - /url: options-general.php
+          - generic [ref=e133]: 
+          - generic [ref=e134]: Settings
+        - list [ref=e135]:
+          - listitem [ref=e136]: Settings
+          - listitem [ref=e137]:
+            - link "General" [ref=e138] [cursor=pointer]:
+              - /url: options-general.php
+          - listitem [ref=e139]:
+            - link "Writing" [ref=e140] [cursor=pointer]:
+              - /url: options-writing.php
+          - listitem [ref=e141]:
+            - link "Reading" [ref=e142] [cursor=pointer]:
+              - /url: options-reading.php
+          - listitem [ref=e143]:
+            - link "Discussion" [ref=e144] [cursor=pointer]:
+              - /url: options-discussion.php
+          - listitem [ref=e145]:
+            - link "Media" [ref=e146] [cursor=pointer]:
+              - /url: options-media.php
+          - listitem [ref=e147]:
+            - link "Permalinks" [ref=e148] [cursor=pointer]:
+              - /url: options-permalink.php
+          - listitem [ref=e149]:
+            - link "Privacy" [ref=e150] [cursor=pointer]:
+              - /url: options-privacy.php
+      - listitem [ref=e151]:
+        - link "GraphQL API" [ref=e152] [cursor=pointer]:
+          - /url: admin.php?page=axiompress-graphql
+          - generic [ref=e153]: 
+          - generic [ref=e154]: GraphQL API
+      - listitem [ref=e155]:
+        - link "AxiomGuard" [ref=e156] [cursor=pointer]:
+          - /url: admin.php?page=axiom-guard
+          - generic [ref=e157]: 
+          - generic [ref=e158]: AxiomGuard
+        - list [ref=e159]:
+          - listitem [ref=e160]: AxiomGuard
+          - listitem [ref=e161]:
+            - link "Dashboard" [ref=e162] [cursor=pointer]:
+              - /url: admin.php?page=axiom-guard
+          - listitem [ref=e163]:
+            - link "Audit Trail" [ref=e164] [cursor=pointer]:
+              - /url: admin.php?page=axiom-guard-audit
+          - listitem [ref=e165]:
+            - link "Hardening" [ref=e166] [cursor=pointer]:
+              - /url: admin.php?page=axiom-guard-hardening
+          - listitem [ref=e167]:
+            - link "Patches" [ref=e168] [cursor=pointer]:
+              - /url: admin.php?page=axiom-guard-patches
+          - listitem [ref=e169]:
+            - link "Settings" [ref=e170] [cursor=pointer]:
+              - /url: admin.php?page=axiom-guard-settings
+      - listitem [ref=e171]:
+        - button "Expand Main menu" [ref=e172] [cursor=pointer]
+  - generic [ref=e174]:
+    - generic [ref=e175]:
+      - navigation "Toolbar":
+        - menu:
+          - group [ref=e176]:
+            - menuitem "About WordPress" [ref=e177] [cursor=pointer]:
+              - generic [ref=e179]: About WordPress
+          - group [ref=e180]:
+            - menuitem "WP Secure" [ref=e181] [cursor=pointer]
+          - group [ref=e182]:
+            - menuitem "1 update available" [ref=e183] [cursor=pointer]:
+              - generic [ref=e185]: "1"
+              - generic [ref=e186]: 1 update available
+          - group [ref=e187]:
+            - menuitem "0 Comments in moderation" [ref=e188] [cursor=pointer]:
+              - generic [ref=e190]: "0"
+              - generic [ref=e191]: 0 Comments in moderation
+          - group [ref=e192]:
+            - menuitem "New" [ref=e193] [cursor=pointer]:
+              - generic [ref=e195]: New
+        - menu [ref=e196]:
+          - group [ref=e197]:
+            - menuitem "Howdy, admin" [ref=e198] [cursor=pointer]
+    - main [ref=e199]:
+      - generic [ref=e200]:
+        - paragraph [ref=e201]:
+          - generic [ref=e202]: "Quote from Hello Dolly song, by Jerry Herman:"
+          - text: It’s so nice to have you back where you belong
+        - generic [ref=e203]:
+          - heading "Plugin Manifests" [level=1] [ref=e204]
+          - generic [ref=e205]:
+            - heading "Active Plugins" [level=2] [ref=e207]
+            - table [ref=e210]:
+              - rowgroup [ref=e211]:
+                - row "Plugin Manifest Isolation SQL Queries Actions" [ref=e212]:
+                  - columnheader "Plugin" [ref=e213]
+                  - columnheader "Manifest" [ref=e214]
+                  - columnheader "Isolation" [ref=e215]
+                  - columnheader "SQL Queries" [ref=e216]
+                  - columnheader "Actions" [ref=e217]
+              - rowgroup [ref=e218]:
+                - row "Axiom Debug axiom-debug Present namespace 0 Regenerate Edit" [ref=e219]:
+                  - cell "Axiom Debug axiom-debug" [ref=e220]:
+                    - strong [ref=e221]: Axiom Debug
+                    - text: axiom-debug
+                  - cell "Present" [ref=e222]: Present
+                  - cell "namespace" [ref=e224]
+                  - cell "0" [ref=e225]
+                  - cell "Regenerate Edit" [ref=e226]:
+                    - button "Regenerate" [ref=e227] [cursor=pointer]
+                    - button "Edit" [active] [ref=e228] [cursor=pointer]
+                - row "AxiomGuard axiom-guard Present namespace 0 Regenerate Edit" [ref=e229]:
+                  - cell "AxiomGuard axiom-guard" [ref=e230]:
+                    - strong [ref=e231]: AxiomGuard
+                    - text: axiom-guard
+                  - cell "Present" [ref=e232]: Present
+                  - cell "namespace" [ref=e234]
+                  - cell "0" [ref=e235]
+                  - cell "Regenerate Edit" [ref=e236]:
+                    - button "Regenerate" [ref=e237] [cursor=pointer]
+                    - button "Edit" [ref=e238] [cursor=pointer]
+                - row "AxiomPress GraphQL axiompress-graphql Present namespace 0 Regenerate Edit" [ref=e239]:
+                  - cell "AxiomPress GraphQL axiompress-graphql" [ref=e240]:
+                    - strong [ref=e241]: AxiomPress GraphQL
+                    - text: axiompress-graphql
+                  - cell "Present" [ref=e242]: Present
+                  - cell "namespace" [ref=e244]
+                  - cell "0" [ref=e245]
+                  - cell "Regenerate Edit" [ref=e246]:
+                    - button "Regenerate" [ref=e247] [cursor=pointer]
+                    - button "Edit" [ref=e248] [cursor=pointer]
+                - row "Hello Dolly hello Present namespace 0 Regenerate Edit" [ref=e249]:
+                  - cell "Hello Dolly hello" [ref=e250]:
+                    - strong [ref=e251]: Hello Dolly
+                    - text: hello
+                  - cell "Present" [ref=e252]: Present
+                  - cell "namespace" [ref=e254]
+                  - cell "0" [ref=e255]
+                  - cell "Regenerate Edit" [ref=e256]:
+                    - button "Regenerate" [ref=e257] [cursor=pointer]
+                    - button "Edit" [ref=e258] [cursor=pointer]
+                - row "Joyful Demo Content joyful-demo-content Present namespace 0 Regenerate Edit" [ref=e259]:
+                  - cell "Joyful Demo Content joyful-demo-content" [ref=e260]:
+                    - strong [ref=e261]: Joyful Demo Content
+                    - text: joyful-demo-content
+                  - cell "Present" [ref=e262]: Present
+                  - cell "namespace" [ref=e264]
+                  - cell "0" [ref=e265]
+                  - cell "Regenerate Edit" [ref=e266]:
+                    - button "Regenerate" [ref=e267] [cursor=pointer]
+                    - button "Edit" [ref=e268] [cursor=pointer]
+          - generic [ref=e298]:
+            - generic [ref=e299]:
+              - 'heading "Manifest Editor: axiom-debug" [level=3] [ref=e300]'
+              - button "×" [ref=e301] [cursor=pointer]
+            - generic [ref=e302]:
+              - paragraph [ref=e303]: Edit the manifest JSON below. This controls what the plugin can access. Changes take effect immediately in enforce mode.
+              - textbox [ref=e304]: "{ \"id\": \"axiom-debug\", \"name\": \"axiom-debug\", \"manifest_version\": \"1.0\", \"isolation\": \"namespace\", \"permissions\": { \"db\": { \"read\": [], \"write\": [], \"delete\": [], \"alter\": [] }, \"filesystem\": [], \"network\": { \"outbound\": [] }, \"wp\": { \"hooks\": { \"read_only\": [], \"write\": [] }, \"options\": { \"read\": [], \"write\": [] }, \"users\": { \"read\": [] } }, \"system\": [] }, \"resource_limits\": { \"cpu_ms\": 500, \"memory_mb\": 64 } }"
+            - generic [ref=e305]:
+              - button "Cancel" [ref=e306] [cursor=pointer]
+              - button "Save Manifest" [ref=e307] [cursor=pointer]
+          - generic [ref=e269]:
+            - heading "What Is a Manifest?" [level=2] [ref=e271]
+            - generic [ref=e272]:
+              - paragraph [ref=e273]:
+                - text: A
+                - strong [ref=e274]: manifest
+                - text: (or permission slip) is a
+                - code [ref=e275]: blueprint.json
+                - text: "file that declares exactly what a plugin is allowed to do. It covers:"
+              - list [ref=e276]:
+                - listitem [ref=e277]:
+                  - strong [ref=e278]: Database tables
+                  - text: the plugin can read, write, or modify
+                - listitem [ref=e279]:
+                  - strong [ref=e280]: Files
+                  - text: the plugin can access on the server
+                - listitem [ref=e281]:
+                  - strong [ref=e282]: Network domains
+                  - text: the plugin can contact
+                - listitem [ref=e283]:
+                  - strong [ref=e284]: WordPress hooks
+                  - text: the plugin can subscribe to
+                - listitem [ref=e285]:
+                  - strong [ref=e286]: Resource limits
+                  - text: for CPU and memory
+              - paragraph [ref=e287]:
+                - text: Use
+                - strong [ref=e288]: Learning Mode
+                - text: to automatically generate manifests based on observed plugin behavior. Then review and switch to
+                - strong [ref=e289]: Enforce Mode
+                - text: to lock down permissions.
+  - contentinfo [ref=e290]:
+    - paragraph [ref=e291]:
+      - generic [ref=e292]:
+        - text: Thank you for creating with
+        - link "WordPress" [ref=e293] [cursor=pointer]:
+          - /url: https://wordpress.org/
+        - text: .
+    - paragraph [ref=e294]: Version 6.9.4

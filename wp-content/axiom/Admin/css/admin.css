@@ -427,3 +427,52 @@
 .ax-hidden { display: none; }
 .ax-text-muted { color: var(--ax-text-muted); }
 .ax-mt-md { margin-top: var(--ax-space-md); }
+
+/* --- Modal form sections --- */
+.ax-editor-section {
+    border: 1px solid var(--ax-border);
+    border-radius: var(--ax-radius);
+    padding: var(--ax-space-md) var(--ax-space-lg);
+    margin-bottom: var(--ax-space-md);
+}
+
+.ax-section-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--ax-text);
+    padding: 0 4px;
+    margin-bottom: var(--ax-space-sm);
+}
+
+.ax-editor-section .ax-field-row {
+    padding: 8px 0;
+    border-bottom: 1px solid var(--ax-surface-alt);
+}
+
+.ax-editor-section .ax-field-row:last-child {
+    border-bottom: none;
+}
+
+.ax-editor-section .ax-field-row {
+    display: grid;
+    grid-template-columns: 150px 1fr;
+    gap: var(--ax-space-sm) var(--ax-space-md);
+}
+
+.ax-editor-section .ax-field-row .ax-label {
+    font-size: 13px;
+    padding-top: 6px;
+}
+
+.ax-editor-section .ax-input {
+    max-width: 100%;
+}
+
+.ax-field-desc {
+    font-size: 12px;
+    color: var(--ax-text-muted);
+    margin: 4px 0 0;
+    line-height: 1.4;
+}
+
+

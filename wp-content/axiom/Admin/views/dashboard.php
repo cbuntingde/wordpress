@@ -12,7 +12,7 @@ $mode_label   = ucfirst( $current_mode );
 ?>
 <div class="wrap ax-wrap">
 
-    <h1 class="ax-page-title">Axiom Security</h1>
+    <h1 class="ax-page-title">Plugin Security</h1>
 
     <?php settings_errors( 'axiom_notices' ); ?>
 
@@ -56,8 +56,8 @@ $mode_label   = ucfirst( $current_mode );
                 </div>
                 <div class="ax-card-body">
                     <?php if ( $current_mode === 'learning' ) : ?>
-                        <p>Learning Mode is active. Axiom is watching all plugin activity and recording what each plugin does. No actions are blocked.</p>
-                        <p class="ax-text-muted">When ready, review the generated manifests under <strong>Plugins</strong>, then switch to <strong>Enforce</strong> mode in Settings.</p>
+                        <p>Learning Mode is active. The <strong>Profiler</strong> is watching all plugin activity and recording what each plugin does. No actions are blocked.</p>
+                        <p class="ax-text-muted">The stats below show audit events captured today &mdash; if you see events, the profiler has data and can auto-generate manifests. When ready, review the generated manifests under <strong>Plugins</strong>, then switch to <strong>Enforce</strong> mode in Settings.</p>
                     <?php elseif ( $current_mode === 'audit' ) : ?>
                         <p>Audit Mode is active. Axiom logs all unapproved actions but does not block them. Review the Audit Log to see what plugins are doing outside their manifests.</p>
                     <?php elseif ( $current_mode === 'enforce' ) : ?>
@@ -100,7 +100,7 @@ $mode_label   = ucfirst( $current_mode );
                         exactly what it can access.
                     </p>
                     <p class="ax-text-muted" style="font-size:12px;">
-                        Version <?php echo esc_html( AXIOM_KERNEL_VERSION ); ?>
+                        Version <?php echo esc_html( \Axiom\AXIOM_KERNEL_VERSION ); ?>
                     </p>
                 </div>
             </div>

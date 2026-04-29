@@ -3,6 +3,11 @@ wp-config.php
 sitemap.xml
 sitemap.xml.gz
 
+# Plugins (ignore all except akismet and hello dolly)
+wp-content/plugins/*
+!wp-content/plugins/akismet/
+!wp-content/plugins/hello.php
+
 # Uploads
 wp-content/uploads/*
 !wp-content/uploads/.gitkeep

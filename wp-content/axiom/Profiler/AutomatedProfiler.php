@@ -230,7 +230,7 @@ final class AutomatedProfiler
 
         $manifest_dir = $this->config->manifest_dir();
         if ( ! is_dir( $manifest_dir ) ) {
-            wp_mkdir_p( $manifest_dir );
+            \wp_mkdir_p( $manifest_dir );
         }
 
         $file = $manifest_dir . '/' . $plugin_slug . '.json';

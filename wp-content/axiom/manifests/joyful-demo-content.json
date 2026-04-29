@@ -1,6 +1,6 @@
 {
-    "id": "hello",
-    "name": "hello",
+    "id": "joyful-demo-content",
+    "name": "joyful-demo-content",
     "manifest_version": "1.0",
     "isolation": "namespace",
     "permissions": {

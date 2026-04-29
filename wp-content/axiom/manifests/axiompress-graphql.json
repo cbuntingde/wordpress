@@ -1,6 +1,6 @@
 {
-    "id": "hello",
-    "name": "hello",
+    "id": "axiompress-graphql",
+    "name": "axiompress-graphql",
     "manifest_version": "1.0",
     "isolation": "namespace",
     "permissions": {

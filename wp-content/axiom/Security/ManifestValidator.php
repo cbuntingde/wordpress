@@ -181,13 +181,13 @@ final class ManifestValidator
     /**
      * Validate the structural integrity of a raw manifest array.
      */
-    private function validate_structure( array $data ): bool
+    private function validate_structure( $data ): bool
     {
-        if ( ! isset( $data['id'] ) || ! is_string( $data['id'] ) ) {
+        if ( ! \is_array( $data ) ) {
             return false;
         }
-        if ( ! isset( $data['manifest_version'] ) ) {
-            $data['manifest_version'] = '1.0';
+        if ( ! isset( $data['id'] ) || ! \is_string( $data['id'] ) ) {
+            return false;
         }
         return true;
     }

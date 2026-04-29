@@ -35,7 +35,7 @@ final class Kernel
     private StateSnapshotEngine $snapshot_engine;
     private HookMarshaller $hook_marshaller;
     private IsolateManager $isolate_manager;
-    private AutomatedProfiler $profiler;
+    private ?AutomatedProfiler $profiler = null;
     private AuditLogger $audit_logger;
 
     /**
@@ -101,13 +101,21 @@ final class Kernel
             $this->audit_logger
         );
 
-        $this->install_database_proxy();
-        $this->install_hook_proxy();
+        if ( $this->config->mode() !== 'disabled' ) {
+            // Hook proxy is safe — it wraps WordPress hooks for isolation.
+            $this->install_hook_proxy();
+
+            // Database proxy only in enforce mode (Proxy_WPDB breaks table name
+            // resolution in learning/audit due to incompatible property mapping).
+            if ( $this->config->is_enforce_mode() ) {
+                $this->install_database_proxy();
+            }
+        }
 
         $this->initialized = true;
 
         $this->audit_logger->log( AuditLogger::INFO, 'Axiom Kernel initialized', [
-            'version'     => AXIOM_KERNEL_VERSION,
+            'version'     => \Axiom\AXIOM_KERNEL_VERSION,
             'mode'        => $this->config->mode(),
             'learning'    => $this->config->is_learning_mode(),
             'plugins'     => count( $this->plugin_contexts ),
@@ -119,6 +127,8 @@ final class Kernel
      */
     public function register_plugin( string $plugin_slug, string $plugin_file, bool $is_modern = false ): PluginContext
     {
+        $this->init();
+
         $manifest = $this->manifest_validator->load_manifest( $plugin_slug, $plugin_file );
 
         $context = new PluginContext(
@@ -151,6 +161,13 @@ final class Kernel
     private function install_database_proxy(): void
     {
         global $wpdb;
+        if ( $wpdb === null ) {
+            \add_action( 'plugins_loaded', function (): void {
+                global $wpdb;
+                $wpdb = $this->database_proxy->proxy( $wpdb );
+            }, 0 );
+            return;
+        }
         $wpdb = $this->database_proxy->proxy( $wpdb );
     }
 

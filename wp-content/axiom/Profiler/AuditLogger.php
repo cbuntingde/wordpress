@@ -46,7 +46,7 @@ final class AuditLogger
 
         $log_dir = dirname( $this->log_file );
         if ( ! is_dir( $log_dir ) ) {
-            wp_mkdir_p( $log_dir );
+            \wp_mkdir_p( $log_dir );
         }
 
         register_shutdown_function( [ $this, 'flush' ] );
@@ -128,7 +128,7 @@ final class AuditLogger
             '[Axiom][%s] %s: %s',
             strtoupper( $entry['level'] ),
             $entry['message'],
-            wp_json_encode( $entry['context'] )
+            \wp_json_encode( $entry['context'] )
         );
         error_log( $line );
     }
@@ -141,6 +141,6 @@ final class AuditLogger
         if ( PHP_SAPI === 'cli' || PHP_SAPI === 'phpdbg' ) {
             return 'cli:' . ( $_SERVER['argv'][0] ?? 'unknown' );
         }
-        return wp_unslash( $_SERVER['REQUEST_URI'] ?? '/' );
+        return \wp_unslash( $_SERVER['REQUEST_URI'] ?? '/' );
     }
 }
