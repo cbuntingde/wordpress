@@ -53,12 +53,15 @@ require ABSPATH . WPINC . '/default-constants.php';
 require_once ABSPATH . WPINC . '/plugin.php';
 
 // ──────────────────────────────────────────────
-// Axiom Kernel: Early autoloader registration.
-// Loaded after the hooks API but before wpdb so
-// the autoloader is ready when the Kernel boots.
+// Axiom Plugin Security: Load core subsystem.
+// Loaded after the plugin API so hooks are available.
 // ──────────────────────────────────────────────
-if ( file_exists( WP_CONTENT_DIR . '/axiom/bootstrap.php' ) ) {
-	require_once WP_CONTENT_DIR . '/axiom/bootstrap.php';
+require_once ABSPATH . WPINC . '/class-axiom-audit-logger.php';
+require_once ABSPATH . WPINC . '/class-axiom-manifest.php';
+require_once ABSPATH . WPINC . '/class-axiom-profiler.php';
+require_once ABSPATH . WPINC . '/class-axiom-plugin-security.php';
+if ( Axiom_Plugin_Security::is_enabled() ) {
+	Axiom_Plugin_Security::init();
 }
 
 /**
@@ -154,19 +157,18 @@ $GLOBALS['table_prefix'] = $table_prefix;
 // Set the database table prefix and the format specifiers for database table columns.
 wp_set_wpdb_vars();
 
-// ──────────────────────────────────────────────
-// Axiom Kernel: Initialize core subsystems.
-// The Kernel installs the database proxy ($wpdb),
-// hook marshaller, resource governor, and all
-// security validators. This MUST happen before
-// any plugin code is loaded.
-// ──────────────────────────────────────────────
-if ( defined( 'AXIOM_LOADED' ) && AXIOM_LOADED ) {
-	\Axiom\Kernel\Kernel::get_instance();
-}
-
 // Start the WordPress object cache, or an external object cache if the drop-in is present.
 wp_start_object_cache();
+
+// ──────────────────────────────────────────────
+// Axiom Plugin Security: Initialize subsystems.
+// Installs the database guard, registers the tick
+// handler, and prepares the hook security layer.
+// Runs after object cache so get_option() works.
+// ──────────────────────────────────────────────
+if ( Axiom_Plugin_Security::is_enabled() ) {
+	Axiom_Plugin_Security::instance()->bootstrap();
+}
 
 // Attach the default filters.
 require ABSPATH . WPINC . '/default-filters.php';
@@ -490,13 +492,21 @@ foreach ( wp_get_mu_plugins() as $mu_plugin ) {
 	$_wp_plugin_file = $mu_plugin;
 
 	// Axiom: Register mu-plugin before loading.
-	if ( defined( 'AXIOM_LOADED' ) && AXIOM_LOADED ) {
+	if ( Axiom_Plugin_Security::is_enabled() ) {
 		$mu_slug = basename( dirname( $mu_plugin ) );
-		$kernel  = \Axiom\Kernel\Kernel::get_instance();
-		$kernel->register_plugin( $mu_slug ?: basename( $mu_plugin, '.php' ), $mu_plugin );
+		if ( dirname( $mu_plugin ) === WP_PLUGIN_DIR ) {
+			$mu_slug = basename( $mu_plugin, '.php' );
+		}
+		Axiom_Plugin_Security::instance()->register_plugin( $mu_slug, $mu_plugin );
+		$GLOBALS['axiom_current_plugin'] = $mu_slug;
 	}
 
 	include_once $mu_plugin;
+
+	// Axiom: Clear plugin tracking after mu-plugin loads.
+	if ( Axiom_Plugin_Security::is_enabled() ) {
+		unset( $GLOBALS['axiom_current_plugin'] );
+	}
 	$mu_plugin = $_wp_plugin_file; // Avoid stomping of the $mu_plugin variable in a plugin.
 
 	/**
@@ -518,13 +528,22 @@ if ( is_multisite() ) {
 		$_wp_plugin_file = $network_plugin;
 
 		// Axiom: Register network plugin before loading.
-		if ( defined( 'AXIOM_LOADED' ) && AXIOM_LOADED ) {
-			$net_slug = basename( dirname( $network_plugin ) );
-			$kernel   = \Axiom\Kernel\Kernel::get_instance();
-			$kernel->register_plugin( $net_slug ?: basename( $network_plugin, '.php' ), $network_plugin );
+		if ( Axiom_Plugin_Security::is_enabled() ) {
+			$net_dir  = dirname( $network_plugin );
+			$net_slug = basename( $net_dir );
+			if ( $net_dir === WP_PLUGIN_DIR ) {
+				$net_slug = basename( $network_plugin, '.php' );
+			}
+			Axiom_Plugin_Security::instance()->register_plugin( $net_slug, $network_plugin );
+			$GLOBALS['axiom_current_plugin'] = $net_slug;
 		}
 
 		include_once $network_plugin;
+
+		// Axiom: Clear plugin tracking after network plugin loads.
+		if ( Axiom_Plugin_Security::is_enabled() ) {
+			unset( $GLOBALS['axiom_current_plugin'] );
+		}
 		$network_plugin = $_wp_plugin_file; // Avoid stomping of the $network_plugin variable in a plugin.
 
 		/**
@@ -592,33 +611,25 @@ foreach ( wp_get_active_and_valid_plugins() as $plugin ) {
 		}
 	}
 
-	// Axiom: Register plugin with the Kernel before loading.
-	// The Kernel loads the blueprint.json manifest and assigns
-	// an isolate context for execution monitoring.
-	if ( defined( 'AXIOM_LOADED' ) && AXIOM_LOADED ) {
-		$plugin_dir  = \dirname( $plugin );
-		$plugin_slug = \basename( $plugin_dir );
+	// Axiom Plugin Security: Register this plugin before it loads.
+	// Sets $GLOBALS['axiom_current_plugin'] so WP_Hook::add_filter()
+	// can attribute callbacks to the correct plugin for isolation.
+	if ( Axiom_Plugin_Security::is_enabled() ) {
+		$plugin_dir  = dirname( $plugin );
+		$plugin_slug = basename( $plugin_dir );
 		if ( $plugin_dir === WP_PLUGIN_DIR ) {
-			$plugin_slug = \basename( $plugin, '.php' );
+			$plugin_slug = basename( $plugin, '.php' );
 		}
-		$kernel      = \Axiom\Kernel\Kernel::get_instance();
-		$context     = $kernel->register_plugin( $plugin_slug, $plugin );
-
-		// Register all callbacks this plugin will add so the
-		// HookMarshaller can attribute them to the correct isolate.
-		if ( $context !== null ) {
-			add_filter( 'axiom_register_callback', static function ( $slug, $cb ) use ( $kernel, $plugin_slug ) {
-				if ( $slug === $plugin_slug ) {
-					$kernel->hook_marshaller()->register_callback( $plugin_slug, $cb );
-				}
-				return $cb;
-			}, 10, 2 );
-		}
+		Axiom_Plugin_Security::instance()->register_plugin( $plugin_slug, $plugin );
+		$GLOBALS['axiom_current_plugin'] = $plugin_slug;
 	}
 
 	$_wp_plugin_file = $plugin;
 	include_once $plugin;
 	$plugin = $_wp_plugin_file; // Avoid stomping of the $plugin variable in a plugin.
+
+	// Axiom: Clear the plugin tracking after the file loaded.
+	unset( $GLOBALS['axiom_current_plugin'] );
 
 	/**
 	 * Fires once a single activated plugin has loaded.
