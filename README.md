@@ -1,5 +1,7 @@
 # Axiom: A Safer WordPress
 
+> **Note:** This fork was an experiment to explore sandboxing WordPress plugins — keeping each plugin in its own protected space so it can't interfere with others, access unauthorized data, or crash your site. The core idea: every plugin gets a "permission slip" (called a manifest) that defines exactly what it's allowed to do.
+
 <div align="center">
   <img src="https://i.postimg.cc/rwp6VLm0/Screenshot-2026-04-28-204039.png" alt="Axiom Dashboard" width="23%" />
   <img src="https://i.postimg.cc/qv7fJdRN/Screenshot-2026-04-28-204103.png" alt="Axiom Settings" width="23%" />
